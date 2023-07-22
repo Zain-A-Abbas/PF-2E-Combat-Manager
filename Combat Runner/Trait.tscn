@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dwskv7vekkgsa"]
+
+[ext_resource type="StyleBox" uid="uid://bqqvue0rytre7" path="res://Themes/TraitStyleboxes/UncommonTrait.tres" id="1_fko71"]
+[ext_resource type="Script" path="res://Trait.gd" id="2_i4iy8"]
+[ext_resource type="FontFile" uid="uid://deqhew2apixpi" path="res://Fonts/GOTHICB.TTF" id="3_v1t76"]
+
+[node name="Trait" type="PanelContainer"]
+offset_right = 5.0
+offset_bottom = 49.0
+theme_override_styles/panel = ExtResource("1_fko71")
+script = ExtResource("2_i4iy8")
+metadata/_edit_group_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="TraitText" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_v1t76")
+theme_override_font_sizes/font_size = 24
+text = "UNCOMMON"
+horizontal_alignment = 1
+vertical_alignment = 1

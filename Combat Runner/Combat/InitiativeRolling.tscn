@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6urmm7uovvhx"]
+
+[sub_resource type="Theme" id="Theme_cxjl0"]
+
+[node name="InitiativeRolling" type="VBoxContainer"]
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 15.0
+
+[node name="Initiative" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Rolling" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.85
+theme_override_constants/separation = 0
+
+[node name="TextHeader" type="ColorRect" parent="Rolling"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.06
+theme = SubResource("Theme_cxjl0")
+color = Color(0.694118, 0.694118, 0.694118, 1)
+
+[node name="Label" type="Label" parent="Rolling/TextHeader"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = " Die Roller"
+
+[node name="ResultsBg" type="ColorRect" parent="Rolling"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_cxjl0")
+color = Color(0.878431, 0.878431, 0.878431, 1)
+
+[node name="Results" type="Label" parent="Rolling/ResultsBg"]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Rolling"]
+layout_mode = 2

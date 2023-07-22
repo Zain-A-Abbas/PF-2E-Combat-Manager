@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmuq4plht6pkj"]
+
+[ext_resource type="Theme" uid="uid://bucbvtpc225di" path="res://Themes/Theme1.tres" id="1_hchce"]
+[ext_resource type="Script" path="res://Combat/DiceButton.gd" id="2_5xnac"]
+
+[node name="d2Button" type="Button"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_hchce")
+text = "d2"
+script = ExtResource("2_5xnac")

@@ -1,0 +1,128 @@
+[gd_scene load_steps=7 format=3 uid="uid://kg3x603pe2ss"]
+
+[ext_resource type="Theme" uid="uid://dx77a5ogmmnut" path="res://Themes/MainHeader.tres" id="1_7o8fp"]
+[ext_resource type="Script" path="res://EnemySheet/EnemySheet.gd" id="1_omui5"]
+[ext_resource type="PackedScene" uid="uid://dwskv7vekkgsa" path="res://Trait.tscn" id="2_ji0hp"]
+[ext_resource type="Theme" uid="uid://byxv6hajwxsqf" path="res://Themes/EnemySheetContext.tres" id="4_hamg6"]
+[ext_resource type="PackedScene" uid="uid://pchkfvbqq5ur" path="res://EnemySheet/SheetContent.tscn" id="5_0yafw"]
+[ext_resource type="Script" path="res://EnemySheet/SheetContentsText.gd" id="5_3nxba"]
+
+[node name="EnemySheet" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_omui5")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.945098, 0.92549, 0.898039, 1)
+
+[node name="SheetData" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SheetScroller" type="ScrollContainer" parent="SheetData"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_right = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SheetInfo" type="VBoxContainer" parent="SheetData/SheetScroller"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Header" type="PanelContainer" parent="SheetData/SheetScroller/SheetInfo"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_7o8fp")
+
+[node name="EnemyName" type="Label" parent="SheetData/SheetScroller/SheetInfo/Header"]
+layout_mode = 2
+theme = ExtResource("1_7o8fp")
+text = "FG"
+vertical_alignment = 1
+uppercase = true
+
+[node name="EnemyLevel" type="Label" parent="SheetData/SheetScroller/SheetInfo/Header"]
+layout_mode = 2
+theme = ExtResource("1_7o8fp")
+text = "Creature 18"
+horizontal_alignment = 2
+vertical_alignment = 1
+uppercase = true
+
+[node name="SheetMargin" type="MarginContainer" parent="SheetData/SheetScroller/SheetInfo"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+
+[node name="Data" type="VBoxContainer" parent="SheetData/SheetScroller/SheetInfo/SheetMargin"]
+layout_mode = 2
+
+[node name="Traits" type="HBoxContainer" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data/Traits"]
+layout_mode = 2
+
+[node name="Trait" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data/Traits" instance=ExtResource("2_ji0hp")]
+layout_mode = 2
+
+[node name="Source" type="RichTextLabel" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
+layout_mode = 2
+theme = ExtResource("4_hamg6")
+bbcode_enabled = true
+text = "[b]Source[/b] [i]AAA[/i] "
+fit_content = true
+
+[node name="Senses" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data" instance=ExtResource("5_0yafw")]
+layout_mode = 2
+
+[node name="Languages" type="RichTextLabel" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
+layout_mode = 2
+theme = ExtResource("4_hamg6")
+bbcode_enabled = true
+text = "[b]Languages[/b] Common, Draconic"
+fit_content = true
+script = ExtResource("5_3nxba")
+info_type = 1
+
+[node name="Skills" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data" instance=ExtResource("5_0yafw")]
+layout_mode = 2
+text = "[b]Skills[/b] Athletics +28, Acrobatics +5"
+
+[node name="Abilities" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data" instance=ExtResource("5_0yafw")]
+layout_mode = 2
+text = "[b]STR[/b] +7"
+
+[node name="HSeparator" type="HSeparator" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
+layout_mode = 2
+
+[node name="ACSaves" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data" instance=ExtResource("5_0yafw")]
+layout_mode = 2
+text = "[b]AC[/b] 42"
+
+[node name="HPResistances" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data" instance=ExtResource("5_0yafw")]
+layout_mode = 2
+text = "[b]HP[/b] 390"

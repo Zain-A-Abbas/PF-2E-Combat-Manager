@@ -1,0 +1,34 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dx77a5ogmmnut"]
+
+[ext_resource type="FontFile" uid="uid://deqhew2apixpi" path="res://Fonts/GOTHICB.TTF" id="1_tu0ku"]
+[ext_resource type="FontFile" uid="uid://cvcshad14e8t0" path="res://Fonts/CenturyGothic.ttf" id="2_o3pa8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42vqe"]
+bg_color = Color(0.364706, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg0e7"]
+content_margin_left = 15.0
+content_margin_right = 15.0
+bg_color = Color(0.364706, 0, 0, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+anti_aliasing = false
+
+[resource]
+Label/colors/font_color = Color(0.796078, 0.756863, 0.560784, 1)
+Label/font_sizes/font_size = 36
+Label/fonts/font = ExtResource("1_tu0ku")
+Panel/styles/panel = SubResource("StyleBoxFlat_42vqe")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_bg0e7")
+RichTextLabel/font_sizes/bold_font_size = 48
+RichTextLabel/font_sizes/normal_font_size = 48
+RichTextLabel/fonts/bold_font = ExtResource("1_tu0ku")
+RichTextLabel/fonts/mono_font = ExtResource("2_o3pa8")
+RichTextLabel/fonts/normal_font = ExtResource("2_o3pa8")

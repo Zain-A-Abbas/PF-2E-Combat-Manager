@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://nbq1iixr2oc1"]
+
+[ext_resource type="Script" path="res://TooltipPanel.gd" id="1_c5k6y"]
+[ext_resource type="Theme" uid="uid://dx77a5ogmmnut" path="res://Themes/MainHeader.tres" id="2_4ex5r"]
+[ext_resource type="Theme" uid="uid://byxv6hajwxsqf" path="res://Themes/EnemySheetContext.tres" id="2_kj4nk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4nf7"]
+bg_color = Color(0.956863, 0.933333, 0.878431, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="PopupPanel" type="PanelContainer"]
+custom_minimum_size = Vector2(800, 200)
+offset_right = 950.0
+offset_bottom = 155.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_e4nf7")
+script = ExtResource("1_c5k6y")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_4ex5r")
+
+[node name="EnemyName" type="Label" parent="MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+theme = ExtResource("2_4ex5r")
+text = "FG"
+vertical_alignment = 1
+uppercase = true
+
+[node name="EnemyLevel" type="Label" parent="MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+theme = ExtResource("2_4ex5r")
+theme_override_font_sizes/font_size = 44
+text = "Creature 18"
+horizontal_alignment = 2
+vertical_alignment = 1
+uppercase = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="TooltipText" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_kj4nk")
+text = "A monster with darkvision can see perfectly well in areas of darkness and dim light, though such vision is in black and white only. Some forms of magical darkness, such as a 4th-level darkness spell, block normal darkvision. A monster with greater darkvision, however, can see through even these forms of magical darkness."
+autowrap_mode = 2

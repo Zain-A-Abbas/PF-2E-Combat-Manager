@@ -1,0 +1,165 @@
+[gd_scene load_steps=10 format=3 uid="uid://bekrgofys7uc7"]
+
+[ext_resource type="Script" path="res://Combat/DiceResults.gd" id="1_m0fvx"]
+[ext_resource type="Theme" uid="uid://bucbvtpc225di" path="res://Themes/Theme1.tres" id="1_mi777"]
+[ext_resource type="PackedScene" uid="uid://bmuq4plht6pkj" path="res://Combat/DiceButton.tscn" id="2_wbg3i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xqhlj"]
+bg_color = Color(0, 0.145098, 0.392157, 1)
+
+[sub_resource type="Theme" id="Theme_ch1wy"]
+Panel/styles/panel = SubResource("StyleBoxFlat_xqhlj")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pwvle"]
+bg_color = Color(0, 0.145098, 0.392157, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e6s5d"]
+
+[sub_resource type="Theme" id="Theme_i6n4j"]
+/colors/p = Color(0, 0, 0, 1)
+/styles/BGStylebox = SubResource("StyleBoxFlat_pwvle")
+/styles/l = SubResource("StyleBoxTexture_e6s5d")
+
+[sub_resource type="Theme" id="Theme_cxjl0"]
+
+[node name="Combat" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="ColorRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 15.0
+theme = SubResource("Theme_ch1wy")
+color = Color(0, 0.145098, 0.392157, 1)
+
+[node name="InitiativeRolling" type="VBoxContainer" parent="HBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 15.0
+theme = SubResource("Theme_i6n4j")
+
+[node name="Initiative" type="VBoxContainer" parent="HBoxContainer/Panel/InitiativeRolling"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Rolling" type="VBoxContainer" parent="HBoxContainer/Panel/InitiativeRolling"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.85
+theme_override_constants/separation = 0
+
+[node name="TextHeader" type="ColorRect" parent="HBoxContainer/Panel/InitiativeRolling/Rolling"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.08
+theme = SubResource("Theme_cxjl0")
+color = Color(0.694118, 0.694118, 0.694118, 1)
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/InitiativeRolling/Rolling/TextHeader"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = " Die Roller"
+
+[node name="ResultsBg" type="ColorRect" parent="HBoxContainer/Panel/InitiativeRolling/Rolling"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_cxjl0")
+color = Color(0.878431, 0.878431, 0.878431, 1)
+
+[node name="Results" type="Label" parent="HBoxContainer/Panel/InitiativeRolling/Rolling/ResultsBg"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+script = ExtResource("1_m0fvx")
+
+[node name="DiceButtons" type="VBoxContainer" parent="HBoxContainer/Panel/InitiativeRolling/Rolling"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ClearDice" type="Button" parent="HBoxContainer/Panel/InitiativeRolling/Rolling/DiceButtons"]
+layout_mode = 2
+theme = ExtResource("1_mi777")
+text = "Clear Results"
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer/Panel/InitiativeRolling/Rolling/DiceButtons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 4
+
+[node name="d2Button" parent="HBoxContainer/Panel/InitiativeRolling/Rolling/DiceButtons/GridContainer" instance=ExtResource("2_wbg3i")]
+layout_mode = 2
+
+[node name="d4Button" parent="HBoxContainer/Panel/InitiativeRolling/Rolling/DiceButtons/GridContainer" instance=ExtResource("2_wbg3i")]
+layout_mode = 2
+text = "d4"
+dice_amount = 4
+
+[node name="d6Button" parent="HBoxContainer/Panel/InitiativeRolling/Rolling/DiceButtons/GridContainer" instance=ExtResource("2_wbg3i")]
+layout_mode = 2
+text = "d6"
+dice_amount = 6
+
+[node name="d8Button" parent="HBoxContainer/Panel/InitiativeRolling/Rolling/DiceButtons/GridContainer" instance=ExtResource("2_wbg3i")]
+layout_mode = 2
+text = "d8"
+dice_amount = 8
+
+[node name="d10Button" parent="HBoxContainer/Panel/InitiativeRolling/Rolling/DiceButtons/GridContainer" instance=ExtResource("2_wbg3i")]
+layout_mode = 2
+text = "d10"
+dice_amount = 10
+
+[node name="d12Button" parent="HBoxContainer/Panel/InitiativeRolling/Rolling/DiceButtons/GridContainer" instance=ExtResource("2_wbg3i")]
+layout_mode = 2
+text = "d12"
+dice_amount = 12
+
+[node name="d20Button" parent="HBoxContainer/Panel/InitiativeRolling/Rolling/DiceButtons/GridContainer" instance=ExtResource("2_wbg3i")]
+layout_mode = 2
+text = "d20"
+dice_amount = 20
+
+[node name="d100Button" parent="HBoxContainer/Panel/InitiativeRolling/Rolling/DiceButtons/GridContainer" instance=ExtResource("2_wbg3i")]
+layout_mode = 2
+text = "d%"
+dice_amount = 100
+
+[node name="EnemyTracker" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 45.0
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 40.0
+
+[connection signal="pressed" from="HBoxContainer/Panel/InitiativeRolling/Rolling/DiceButtons/ClearDice" to="HBoxContainer/Panel/InitiativeRolling/Rolling/ResultsBg/Results" method="_on_clear_dice_pressed"]
