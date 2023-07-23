@@ -1,6 +1,7 @@
 extends Control
 
 const trait_template := preload("res://Trait.tscn")
+const SHEET_CONTENT := preload("res://EnemySheet/SheetContent.tscn")
 
 # A lot of these are their own variable just for faster referencing
 var enemy_data
@@ -18,13 +19,15 @@ var enemy_attributes
 @onready var abilities := $SheetData/SheetScroller/SheetInfo/SheetMargin/Data/Abilities
 @onready var ac_saves := $SheetData/SheetScroller/SheetInfo/SheetMargin/Data/ACSaves
 @onready var hp_resistances := $SheetData/SheetScroller/SheetInfo/SheetMargin/Data/HPResistances
+@onready var auras := $SheetData/SheetScroller/SheetInfo/SheetMargin/Data/Auras
+
 
 func _ready():
 	setup()
 
 func setup():
 	# Gets the enemy sheet data
-	var enemy_file = FileAccess.open("res://Data/Enemies/ancient-magma-dragon.json", FileAccess.READ)
+	var enemy_file = FileAccess.open("res://Data/Enemies/ancient-white-dragon.json", FileAccess.READ)
 	var json_conversion = JSON.new()
 	json_conversion.parse(enemy_file.get_as_text())
 	enemy_data = json_conversion.get_data()
@@ -104,17 +107,17 @@ func setup_senses():
 	# Add tooltips to the senses
 	i = 0
 	for sense in enemy_senses:
-		for sense_tooltip in Tooltips.senses_tooltips_list:
-			if sense_tooltip in sense:
-				var tooltip = Tooltips.senses_tooltips[sense_tooltip]
-				enemy_senses[i] = "[hint=" + str(tooltip) + "]" + sense + "[/hint]"
-				break
+		enemy_senses[i] = get_sheet_tooltip("sense", sense) + sense + "[/hint]"
 		senses.text += enemy_senses[i]
 		if enemy_senses.size() > i + 1:
 			senses.text += ", "
 		i += 1
 
 func setup_languages():
+	if enemy_system["traits"]["languages"]["value"].is_empty():
+		languages.visible = false
+		return
+	languages.visible = true
 	languages.text = "[b]Languages[/b] "
 	var monster_languages: Array = enemy_system["traits"]["languages"]["value"]
 	var i: int = 0
@@ -126,7 +129,7 @@ func setup_languages():
 
 func setup_skills():
 	skills.text = "[b]Skills[/b] "
-	var enemy_skills: Array
+	var enemy_skills: Array = []
 	for ability in enemy_abilities:
 		if ability["type"] == "lore":
 			enemy_skills.append(ability)
@@ -180,6 +183,9 @@ func setup_defensive_abilities():
 	
 	# HP and Resistances
 	setup_hp_immunities_weaknesses()
+	
+	# Auras if applicable
+	setup_auras()
 
 func setup_ac_saves():
 	ac_saves.text = "[b]AC[/b] " + str(enemy_attributes["ac"]["value"]) + "; "
@@ -237,3 +243,54 @@ func setup_hp_immunities_weaknesses():
 			i += 1
 			if i < enemy_attributes["weaknesses"].size():
 				hp_resistances.text += ", "
+
+func setup_auras():
+	var text_interpreter: TextInterpreter = TextInterpreter.new()
+	auras.visible = false
+	for child in auras.get_children():
+		auras.remove_child(child)
+	var has_auras: bool = false
+	for ability in enemy_abilities:
+		if !ability["system"]["rules"].is_empty():
+			if ability["system"]["rules"][0].has("key"):
+				if ability["system"]["rules"][0]["key"] == "Aura":
+					var desc_text = text_interpreter.ability_parser(ability["system"]["description"]["value"])
+					has_auras = true
+					var new_aura_entry = SHEET_CONTENT.instantiate()
+					new_aura_entry.info_type = SheetContent.InfoTypes.TRAIT
+					var aura_name = "[b]" + ability["name"] + "[/b] "
+					var aura_traits: String = "("
+					var i: int = 0
+					for aura_trait in ability["system"]["rules"][0]["traits"]:
+						aura_traits += get_sheet_tooltip("trait", aura_trait) + aura_trait + "[/hint]"
+						i += 1
+						if i < ability["system"]["rules"][0]["traits"].size():
+							aura_traits += ", "
+					aura_traits += ")"
+					var aura_range: String = " " + str(ability["system"]["rules"][0]["radius"]) + " feet"
+					
+					# Gets the aura DC. This looks weird and horrible because the DC is formatted in the worst way possible
+						# in the enemy file
+					var aura_dc: String = ""
+					if ability["system"]["description"]["value"].contains("|dc:"):
+						var aura_description_location: int = ability["system"]["description"]["value"].find("|dc:") + 4
+						aura_dc = ", DC " + str(ability["system"]["description"]["value"][aura_description_location] + ability["system"]["description"]["value"][aura_description_location + 1])
+					new_aura_entry.text = aura_name + aura_traits + aura_range + aura_dc
+					auras.add_child(new_aura_entry)
+	if has_auras:
+		auras.visible = true
+	for ability in enemy_abilities:
+		if ability["name"] == "Breath Weapon":
+			var aaa = text_interpreter.ability_parser(ability["system"]["description"]["value"])
+
+func get_sheet_tooltip(tooltip_type, tooltip_reference) -> String:
+	var tooltip_list
+	match tooltip_type:
+		"sense":
+			tooltip_list = Tooltips.senses_tooltips
+		"trait":
+			tooltip_list = Tooltips.traits_tooltips
+	for tooltip in tooltip_list:
+		if tooltip in tooltip_reference:
+			return "[hint=" + tooltip_list[tooltip] + "]"
+	return "[hint=]"

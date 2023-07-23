@@ -126,3 +126,7 @@ text = "[b]AC[/b] 42"
 [node name="HPResistances" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data" instance=ExtResource("5_0yafw")]
 layout_mode = 2
 text = "[b]HP[/b] 390"
+
+[node name="Auras" type="VBoxContainer" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
+visible = false
+layout_mode = 2

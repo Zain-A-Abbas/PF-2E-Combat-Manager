@@ -3,12 +3,13 @@
 [ext_resource type="Theme" uid="uid://byxv6hajwxsqf" path="res://Themes/EnemySheetContext.tres" id="1_dtlcl"]
 [ext_resource type="Script" path="res://EnemySheet/SheetContentsText.gd" id="2_le7wy"]
 
-[node name="Senses" type="RichTextLabel"]
+[node name="Content" type="RichTextLabel"]
 theme = ExtResource("1_dtlcl")
 bbcode_enabled = true
 text = "[b]Perception[/b] +1;"
 fit_content = true
 script = ExtResource("2_le7wy")
 info_type = 1
+metadata/_edit_lock_ = true
 
 [connection signal="meta_clicked" from="." to="." method="_on_meta_clicked"]

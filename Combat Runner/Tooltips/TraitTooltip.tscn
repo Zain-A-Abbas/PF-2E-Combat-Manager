@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cnfcg04lwpg2w"]
+[gd_scene load_steps=6 format=3 uid="uid://c1p4lao1ml44w"]
 
-[ext_resource type="Script" path="res://TooltipPanel.gd" id="1_tl34h"]
-[ext_resource type="Theme" uid="uid://dx77a5ogmmnut" path="res://Themes/MainHeader.tres" id="2_4ihk0"]
-[ext_resource type="Theme" uid="uid://byxv6hajwxsqf" path="res://Themes/EnemySheetContext.tres" id="3_g8ox4"]
-[ext_resource type="FontFile" uid="uid://deqhew2apixpi" path="res://Fonts/GOTHICB.TTF" id="4_31qdr"]
+[ext_resource type="Script" path="res://TooltipPanel.gd" id="1_hfjj7"]
+[ext_resource type="Theme" uid="uid://dx77a5ogmmnut" path="res://Themes/MainHeader.tres" id="2_3d2lv"]
+[ext_resource type="Theme" uid="uid://byxv6hajwxsqf" path="res://Themes/EnemySheetContext.tres" id="3_x3n7m"]
+[ext_resource type="FontFile" uid="uid://deqhew2apixpi" path="res://Fonts/GOTHICB.TTF" id="4_eo5gq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e4nf7"]
 bg_color = Color(0.956863, 0.933333, 0.878431, 1)
@@ -18,7 +18,7 @@ custom_minimum_size = Vector2(800, 0)
 offset_right = 950.0
 offset_bottom = 155.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_e4nf7")
-script = ExtResource("1_tl34h")
+script = ExtResource("1_hfjj7")
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
@@ -35,11 +35,11 @@ layout_mode = 2
 [node name="Header" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-theme = ExtResource("2_4ihk0")
+theme = ExtResource("2_3d2lv")
 
 [node name="TooltipHeader" type="Label" parent="MarginContainer/VBoxContainer/Header"]
 layout_mode = 2
-theme = ExtResource("2_4ihk0")
+theme = ExtResource("2_3d2lv")
 theme_override_font_sizes/font_size = 32
 text = "FG"
 vertical_alignment = 1
@@ -47,9 +47,9 @@ uppercase = true
 
 [node name="TooltipCategory" type="Label" parent="MarginContainer/VBoxContainer/Header"]
 layout_mode = 2
-theme = ExtResource("2_4ihk0")
+theme = ExtResource("2_3d2lv")
 theme_override_font_sizes/font_size = 28
-text = "Creature ABILITY"
+text = "TRAIT"
 horizontal_alignment = 2
 vertical_alignment = 1
 uppercase = true
@@ -60,7 +60,7 @@ layout_mode = 2
 
 [node name="TooltipText" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("3_g8ox4")
-theme_override_fonts/font = ExtResource("4_31qdr")
+theme = ExtResource("3_x3n7m")
+theme_override_fonts/font = ExtResource("4_eo5gq")
 text = "A monster with darkvision can see perfectly well in areas of darkness and dim light, though such vision is in black and white only. Some forms of magical darkness, such as a 4th-level darkness spell, block normal darkvision. A monster with greater darkvision, however, can see through even these forms of magical darkness."
 autowrap_mode = 2

@@ -1,6 +1,7 @@
 extends RichTextLabel
+class_name SheetContent
 
-enum InfoTypes{
+enum InfoTypes {
 	NULL,
 	SENSE,
 	SPELL,
@@ -19,7 +20,13 @@ func _make_custom_tooltip(for_text):
 			tooltip = preload("res://Tooltips/SenseTooltip.tscn").instantiate()
 			tooltip.get_node("MarginContainer").get_node("VBoxContainer").get_node("Header").get_node("TooltipHeader").text = tooltip_header
 			tooltip.get_node("MarginContainer").get_node("VBoxContainer").get_node("TooltipText").text = tooltip_description
-			
+		
+		InfoTypes.TRAIT:
+			var tooltip_header = for_text.split("|")[0]
+			var tooltip_description = for_text.split("|")[1]
+			tooltip = preload("res://Tooltips/TraitTooltip.tscn").instantiate()
+			tooltip.get_node("MarginContainer").get_node("VBoxContainer").get_node("Header").get_node("TooltipHeader").text = tooltip_header
+			tooltip.get_node("MarginContainer").get_node("VBoxContainer").get_node("TooltipText").text = tooltip_description
 	return tooltip
 
 
