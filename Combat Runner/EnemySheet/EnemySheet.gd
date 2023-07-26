@@ -3,11 +3,11 @@ extends Control
 const trait_template := preload("res://Trait.tscn")
 const SHEET_CONTENT := preload("res://EnemySheet/SheetContent.tscn")
 
-const ONE_ACTION := preload("res://Icons/Action.png")
-const TWO_ACTIVITY := preload("res://Icons/2Activity.png")
-const THREE_ACTIVITY := preload("res://Icons/3Activity.png")
-const REACTION := preload("res://Icons/Reaction.png")
-const FREE_ACTION := preload("res://Icons/FreeAction.png")
+const ONE_ACTION := "◆"
+const TWO_ACTIVITY := "◆"
+const THREE_ACTIVITY := "◆"
+const REACTION := "◆"
+const FREE_ACTION := "◆"
 
 # A lot of these are their own variable just for faster referencing
 var enemy_data
@@ -69,6 +69,9 @@ func setup():
 	
 	# Enemy Attacks
 	setup_attacks()
+	
+	# Enemy Spells
+	setup_spells()
 
 
 
@@ -280,7 +283,7 @@ func setup_other_defensive_abilities():
 		var ability_name = "[b]" + ability["name"] + "[/b] "
 		var ability_icon: String = ""
 		if ability["system"]["actionType"]["value"] == "reaction":
-			ability_icon = "[img=24]" + REACTION.get_path() + "[/img] "
+			ability_icon = REACTION + " "
 		
 		# Add traits
 		var ability_traits: String = "("
@@ -302,12 +305,79 @@ func setup_other_defensive_abilities():
 func setup_attacks():
 	var text_interpreter: TextInterpreter = TextInterpreter.new()
 	attacks.visible = false
-	for child in defensive_abilities.get_children():
+	for child in attacks.get_children():
 		attacks.remove_child(child)
 	
 	for ability in enemy_abilities:
 		if ability["type"] == "melee":
-			pass
+			
+			# Initialize ability
+			var new_attack_entry = SHEET_CONTENT.instantiate()
+			new_attack_entry.info_type = SheetContent.InfoTypes.TRAIT
+			
+			# Add name and icon
+			var melee = "[b]" + "Melee" + "[/b] "
+			var attack_icon := ONE_ACTION + " "
+			var attack_name: String = ability["name"] + " "
+			
+			# Attack bonus handling
+			var attack_bonus: int = ability["system"]["bonus"]["value"]
+				# Remove the "+" if the attack is negative
+			var attack_plus: String = "+"
+			if attack_bonus < 0:
+				attack_plus = ""
+			var multiple_attack_penalty: int = 5
+			if ability["system"]["traits"]["value"].has("agile"):
+				multiple_attack_penalty = 4
+			var attack_bonus_text: String = attack_plus + "[url]" + str(attack_bonus) + "[/url]" + " "
+			if attack_bonus - multiple_attack_penalty < 0:
+				attack_plus = ""
+			attack_bonus_text += "[" + attack_plus + "[url]" + str(attack_bonus - multiple_attack_penalty) + "[/url]"
+			if attack_bonus - multiple_attack_penalty * 2 < 0:
+				attack_plus = ""
+			attack_bonus_text += "/" + attack_plus + "[url]" + str(attack_bonus - multiple_attack_penalty * 2) + "[/url]" + "] "
+			
+			# Traits
+			var attack_traits: String = "("
+			var i: int = 0
+			for attack_trait in ability["system"]["traits"]["value"]:
+				var final_trait: String = text_interpreter.trait_name_parser(attack_trait)
+				attack_traits += get_sheet_tooltip("trait", final_trait) + final_trait + "[/hint]"
+				i += 1
+				if i < ability["system"]["traits"]["value"].size():
+					attack_traits += ", "
+			attack_traits += ") "
+			
+			# Damage
+			var damage_text: String = "[b]Damage[/b] "
+			i = 0
+			for damage_roll in ability["system"]["damageRolls"].keys():
+				if i > 0:
+					damage_text += " plus "
+				damage_text += ability["system"]["damageRolls"][damage_roll]["damage"] + " " + ability["system"]["damageRolls"][damage_roll]["damageType"] 
+				i += 1
+			
+			new_attack_entry.text = melee + attack_icon + attack_name + attack_bonus_text + attack_traits + damage_text
+			attacks.add_child(new_attack_entry)
+	
+	if attacks.get_child_count() > 0:
+		attacks.visible = true
+
+
+func setup_spells():
+	var has_spells: bool = false
+	
+	# Verify that the enemy has spells
+	for ability in enemy_abilities:
+		if ability["system"].has("type"):
+			if ability["system"]["type"]["value"] == "spellcastingEntry":
+				has_spells = true
+	
+	if !has_spells:
+		return
+	
+	
+	
 
 func get_sheet_tooltip(tooltip_type, tooltip_reference) -> String:
 	var tooltip_list

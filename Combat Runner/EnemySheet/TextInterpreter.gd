@@ -1,6 +1,8 @@
 extends Node
 class_name TextInterpreter
 
+# Parsing ability descriptions
+
 func ability_parser(ability_text: String) -> String:
 	var parsed_description = remove_unnecessary(ability_text)
 	parsed_description = area_parser(parsed_description)
@@ -108,3 +110,18 @@ func format_parser(description_text: String) -> String:
 	var formatted_description: String = regex.sub(description_text, "[b]")
 	regex.compile("</strong>")
 	return format_parser(regex.sub(formatted_description, "[/b]"))
+
+# Parsing trait names
+
+func trait_name_parser(trait_name: String) -> String:
+	var parsed_trait := range_parser(trait_name)
+	return parsed_trait
+
+# Changes "reach-20" to "reach 20 feet", etc.
+func range_parser(trait_text: String) -> String:
+	var regex = RegEx.new()
+	regex.compile("reach-(\\d+)")
+	if regex.search(trait_text) == null:
+		return trait_text
+	
+	return regex.sub(trait_text, "reach " + regex.search(trait_text).strings[1] + " feet")
