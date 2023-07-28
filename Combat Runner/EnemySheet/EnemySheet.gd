@@ -4,10 +4,10 @@ const trait_template := preload("res://Trait.tscn")
 const SHEET_CONTENT := preload("res://EnemySheet/SheetContent.tscn")
 
 const ONE_ACTION := "◆"
-const TWO_ACTIVITY := "◆"
-const THREE_ACTIVITY := "◆"
-const REACTION := "◆"
-const FREE_ACTION := "◆"
+const TWO_ACTIVITY := "◆◆"
+const THREE_ACTIVITY := "◆◆◆"
+const REACTION := "⤾"
+const FREE_ACTION := "◇"
 
 # A lot of these are their own variable just for faster referencing
 var enemy_data
@@ -26,7 +26,7 @@ var enemy_attributes
 @onready var ac_saves := $SheetData/SheetScroller/SheetInfo/SheetMargin/Data/ACSaves
 @onready var hp_resistances := $SheetData/SheetScroller/SheetInfo/SheetMargin/Data/HPResistances
 @onready var defensive_abilities := $SheetData/SheetScroller/SheetInfo/SheetMargin/Data/DefensiveAbilities
-@onready var attacks := $SheetData/SheetScroller/SheetInfo/SheetMargin/Data/MeleeRangedAttacks
+@onready var attacks := $"SheetData/SheetScroller/SheetInfo/SheetMargin/Data/Speed&OffensiveAbilities"
 
 
 func _ready():
@@ -34,7 +34,7 @@ func _ready():
 
 func setup():
 	# Gets the enemy sheet data
-	var enemy_file = FileAccess.open("res://Data/Enemies/ancient-white-dragon.json", FileAccess.READ)
+	var enemy_file = FileAccess.open("res://Data/Enemies/eobald.json", FileAccess.READ)
 	var json_conversion = JSON.new()
 	json_conversion.parse(enemy_file.get_as_text())
 	enemy_data = json_conversion.get_data()
@@ -67,11 +67,17 @@ func setup():
 	# Enemy Defensive Abilities
 	setup_defensive_abilities()
 	
+	# Enemy Speed
+	setup_speed()
+	
 	# Enemy Attacks
 	setup_attacks()
 	
 	# Enemy Spells
 	setup_spells()
+	
+	# Other offensive abilities
+	setup_offensive_abilities()
 
 
 
@@ -108,13 +114,14 @@ func setup_senses():
 	var perception = "[b]Perception[/b] " + "+" + "[url]" + str(enemy_system["attributes"]["perception"]["value"]) + "[/url]"
 	var enemy_senses = enemy_system["traits"]["senses"]["value"].split(",")
 	var i: int = 0
-	for sense in enemy_senses:
-		if sense[0] == " ":
-			enemy_senses[i] = sense.substr(1)
-		i += 1
+	if enemy_senses[0] != "":
+		for sense in enemy_senses:
+			if sense[0] == " ":
+				enemy_senses[i] = sense.substr(1)
+			i += 1
 	
 	senses.text += perception
-	if enemy_senses.size() > 0:
+	if enemy_senses[0] != "":
 		senses.text += "; "
 	
 	# Add tooltips to the senses
@@ -223,7 +230,7 @@ func setup_ac_saves():
 		ac_saves.text += "; " + enemy_attributes["allSaves"]["value"]
 
 func setup_hp_immunities_weaknesses():
-	hp_resistances.text = "[b]HP[/b] " + str(enemy_attributes["hp"]["value"])
+	hp_resistances.text = "[b]HP[/b] " + str(enemy_attributes["hp"]["max"])
 	
 	if enemy_attributes.has("immunities"):
 		hp_resistances.text += "; "
@@ -294,6 +301,8 @@ func setup_other_defensive_abilities():
 			if i < ability["system"]["traits"]["value"].size():
 				ability_traits += ", "
 		ability_traits += ") "
+		if ability_traits == "() ":
+			ability_traits = ""
 		
 		# Add description
 		var desc_text = text_interpreter.ability_parser(ability["system"]["description"]["value"])
@@ -302,11 +311,33 @@ func setup_other_defensive_abilities():
 	if defensive_abilities.get_child_count() > 0:
 		defensive_abilities.visible = true
 
+func setup_speed():
+	for child in attacks.get_children():
+		attacks.remove_child(child)
+	var speed_entry = SHEET_CONTENT.instantiate()
+	var speed_text: String = "[b]Speed[/b] "
+	var speed = enemy_attributes["speed"]
+	if speed["value"] > 0:
+		speed_text += str(speed["value"]) + " feet"
+	# Add different speed methods
+	if speed.has("otherSpeeds"):
+		for speed_type in speed["otherSpeeds"]:
+			# comma viarbale stops speed from turning out like Speed , swim 50 if a creature has no land speed
+			var comma: String = ", "
+			if !speed_text.contains(" feet"):
+				comma = ""
+			speed_text += comma + speed_type["type"] + " " + str(speed_type["value"]) + " feet"
+	
+	# Add details such as magma swim
+	if speed.has("details"):
+		speed_text += "; " + speed["details"]
+	speed_entry.text = speed_text
+	attacks.add_child(speed_entry)
+	attacks.visible = true
+
 func setup_attacks():
 	var text_interpreter: TextInterpreter = TextInterpreter.new()
 	attacks.visible = false
-	for child in attacks.get_children():
-		attacks.remove_child(child)
 	
 	for ability in enemy_abilities:
 		if ability["type"] == "melee":
@@ -366,18 +397,177 @@ func setup_attacks():
 
 func setup_spells():
 	var has_spells: bool = false
+	var spell_tradition_name: String = ""
+	var dc: int = 0
+	var attack_roll: int = 0
 	
 	# Verify that the enemy has spells
 	for ability in enemy_abilities:
-		if ability["system"].has("type"):
-			if ability["system"]["type"]["value"] == "spellcastingEntry":
-				has_spells = true
+		if ability["type"] == "spellcastingEntry":
+			has_spells = true
+			spell_tradition_name = ability["name"]
+			dc = ability["system"]["spelldc"]["dc"]
+			attack_roll = ability["system"]["spelldc"]["value"]
 	
 	if !has_spells:
 		return
 	
+	attacks.visible = true
+	var tradition_title: String = "[b]" + spell_tradition_name + "[/b] "
+	var dc_text: String = "DC " + str(dc) + ", "
+	var attack_roll_text: String = "attack +" + "[url]" + str(attack_roll) + "[/url]; "
 	
+	# Initialize spell_list
+	var spell_list = SHEET_CONTENT.instantiate()
+	spell_list.text = tradition_title + dc_text + attack_roll_text
+	attacks.add_child(spell_list)
 	
+	# Find spells then sort by level
+	var spell_levels: Array[int] = []
+	for spell in enemy_abilities:
+		# Doesn't add cantrips to the list
+		if spell["type"] != "spell":
+			continue
+		if spell["system"]["category"]["value"] != "spell":
+			continue
+		if spell["system"]["traits"]["value"].has("cantrip") || spell["name"].contains("(Constant)"):
+			continue
+		if spell["system"]["location"].has("heightenedLevel"):
+			var spell_level: int = spell["system"]["location"]["heightenedLevel"]
+			if !spell_levels.has(spell_level):
+				spell_levels.append(spell_level)
+		else:
+			var spell_level: int = spell["system"]["level"]["value"]
+			if !spell_levels.has(spell_level):
+				spell_levels.append(spell_level)
+	spell_levels.sort()
+	spell_levels.reverse()
+	
+	# Add non-cantrip and non-constant spells to the spell list
+	for spell_level in spell_levels:
+		var spell_level_text: String = "[b]" + ordinal_numbers(spell_level) + "[/b] "
+		for spell in enemy_abilities:
+			if spell["type"] != "spell":
+				continue
+			if spell["system"]["category"]["value"] != "spell":
+				continue
+			if spell["system"]["traits"]["value"].has("cantrip") || spell["name"].contains("(Constant)"):
+				continue
+			
+			if spell["system"]["location"].has("heightenedLevel"):
+				var this_spell_level: int = spell["system"]["location"]["heightenedLevel"]
+				if this_spell_level == spell_level:
+					spell_level_text += spell["name"].to_lower() + ", "
+			else:
+				var this_spell_level: int = spell["system"]["level"]["value"]
+				if this_spell_level == spell_level:
+					spell_level_text += spell["name"].to_lower() + ", "
+		# Makes the last spell end with "; " instead of ", "
+		spell_level_text[-2] = ";"
+		spell_list.text += spell_level_text
+	
+	# Add cantrips to the spell list
+	var has_cantrips: bool = false
+	var cantrips_text: String = ""
+	for spell in enemy_abilities:
+		if spell["type"] != "spell":
+			continue
+		if spell["system"]["traits"]["value"].has("cantrip"):
+			if !has_cantrips:
+				cantrips_text += "[b]Cantrips (" + ordinal_numbers(spell_levels[0]) + ")[/b] "
+			has_cantrips = true
+			cantrips_text += spell["name"].to_lower() + ", "
+	if has_cantrips:
+		cantrips_text[-2] = ";"
+		spell_list.text += cantrips_text
+	
+	# Add constant spells to the spell list
+	var has_constant_spells: bool = false
+	var constant_text: String = ""
+	for spell in enemy_abilities:
+		if spell["type"] != "spell":
+			continue
+		if spell["name"].contains("(Constant)"):
+			if !has_constant_spells:
+				constant_text += "[b]Constant[/b] "
+			has_constant_spells = true
+			var this_spell_level: int
+			if spell["system"]["location"].has("heightenedLevel"):
+				this_spell_level = spell["system"]["location"]["heightenedLevel"]
+			else:
+				this_spell_level = spell["system"]["level"]["value"]
+			constant_text += spell["name"].substr(0, spell["name"].length() - 11) + " (" + ordinal_numbers(this_spell_level) + "), "
+	if has_constant_spells:
+		constant_text[-2] = ""
+		spell_list.text += constant_text
+ 
+# Converts 1, 2, etc. to 1st, 2nd
+func ordinal_numbers(number: int) -> String:
+	var mod_number: int = number % 10
+	match mod_number:
+		1:
+			return "1st"
+		2:
+			return "2nd"
+		3:
+			return "3rd"
+		_:
+			return str(number) + "th"
+
+# Add in every remaining ability to the enemy
+func setup_offensive_abilities():
+	var text_interpreter: TextInterpreter = TextInterpreter.new()
+	
+	for ability in enemy_abilities:
+		
+		if !ability["system"].has("category"):
+			continue
+		
+		if !ability["system"]["category"] is String:
+			continue
+		
+		if ability["system"]["category"] == "offensive":
+			
+			# Initialize ability
+			var new_offensive_entry = SHEET_CONTENT.instantiate()
+			new_offensive_entry.info_type = SheetContent.InfoTypes.TRAIT
+			
+			# Add name and icon
+			var ability_name = "[b]" + ability["name"] + "[/b] "
+			var action_icon := ""
+			if ability["system"]["actionType"]["value"] == "free":
+				action_icon = FREE_ACTION + " "
+			elif ability["system"]["actions"]["value"] != null:
+				var action_count = ability["system"]["actions"]["value"]
+				match int(action_count):
+					1:
+						action_icon = ONE_ACTION + " "
+					2:
+						action_icon = TWO_ACTIVITY + " "
+					3:
+						action_icon = THREE_ACTIVITY + " "
+			
+			# Traits
+			var ability_traits: String = "("
+			var i: int = 0
+			for ability_trait in ability["system"]["traits"]["value"]:
+				var final_trait: String = text_interpreter.trait_name_parser(ability_trait)
+				ability_traits += get_sheet_tooltip("trait", final_trait) + final_trait + "[/hint]"
+				i += 1
+				if i < ability["system"]["traits"]["value"].size():
+					ability_traits += ", "
+			ability_traits += ") "
+			if ability_traits == "() ":
+				ability_traits = ""
+			
+			
+			# Description
+			var ability_description: String = text_interpreter.ability_parser(ability["system"]["description"]["value"])
+			
+			
+			new_offensive_entry.text = ability_name + action_icon + ability_traits + ability_description
+			attacks.add_child(new_offensive_entry)
+			attacks.visible = true
 
 func get_sheet_tooltip(tooltip_type, tooltip_reference) -> String:
 	var tooltip_list

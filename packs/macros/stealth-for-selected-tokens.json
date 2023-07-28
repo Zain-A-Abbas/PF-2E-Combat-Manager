@@ -1,0 +1,12 @@
+{
+    "_id": "yBuEphSaJJ7V9Yw3",
+    "author": "ru9MkwAaWXaeSZph",
+    "command": "game.pf2e.gm.stealthForSelected(event);",
+    "img": "systems/pf2e/icons/features/classes/surprice-attack.webp",
+    "name": "Stealth for Selected Tokens",
+    "ownership": {
+        "default": 0
+    },
+    "scope": "global",
+    "type": "script"
+}

@@ -1,0 +1,39 @@
+{
+    "_id": "PxTRE0mFEO3tyt8h",
+    "img": "systems/pf2e/icons/features/feats/feats.webp",
+    "name": "Advanced Mysteries",
+    "system": {
+        "actionType": {
+            "value": "passive"
+        },
+        "actions": {
+            "value": null
+        },
+        "category": "class",
+        "description": {
+            "value": "<p>You gain one oracle feat. For meeting its prerequisites, your oracle level is equal to half your level.</p>\n<hr />\n<p><strong>Special</strong> You can select this feat more than once. Each time, you gain another oracle feat.</p>"
+        },
+        "level": {
+            "value": 6
+        },
+        "maxTakable": null,
+        "prerequisites": {
+            "value": [
+                {
+                    "value": "Basic Mysteries"
+                }
+            ]
+        },
+        "rules": [],
+        "source": {
+            "value": "Pathfinder Advanced Player's Guide"
+        },
+        "traits": {
+            "rarity": "common",
+            "value": [
+                "archetype"
+            ]
+        }
+    },
+    "type": "feat"
+}

@@ -1,0 +1,12 @@
+{
+    "_id": "084MOWWSEVNwpHVG",
+    "author": "ru9MkwAaWXaeSZph",
+    "command": "game.pf2e.gm.perceptionForSelected(event);",
+    "img": "systems/pf2e/icons/spells/vision-of-weakness.webp",
+    "name": "Perception for Selected Tokens",
+    "ownership": {
+        "default": 0
+    },
+    "scope": "global",
+    "type": "script"
+}

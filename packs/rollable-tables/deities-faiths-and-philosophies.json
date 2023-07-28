@@ -1,0 +1,336 @@
+{
+    "_id": "6g0mTIIgpzSmVDCM",
+    "description": "Table of Deities, Faiths and Philosophies",
+    "displayRoll": true,
+    "formula": "1d23",
+    "img": "icons/svg/d20-grey.svg",
+    "name": "Deities, Faiths and Philosophies",
+    "ownership": {
+        "default": 0
+    },
+    "replacement": true,
+    "results": [
+        {
+            "_id": "gdB0PzJyyzi8huxh",
+            "documentCollection": "pf2e.deities",
+            "documentId": "d56paSkcwvll2OhR",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                1,
+                1
+            ],
+            "text": "Abadar",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "texIzwus9xuyWIP3",
+            "documentCollection": "pf2e.deities",
+            "documentId": "QRkcFciCOmFoxF1B",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                2,
+                2
+            ],
+            "text": "Asmodeus",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "DsbXXoXdoDruK1F7",
+            "documentCollection": "pf2e.deities",
+            "documentId": "AlL9GtlTldbqNoVm",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                3,
+                3
+            ],
+            "text": "Calistria",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "5oqlPQMvYSlSJfil",
+            "documentCollection": "pf2e.deities",
+            "documentId": "v67fHklTZ6LoU54q",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                4,
+                4
+            ],
+            "text": "Cayden Cailean",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "3KWqhiasiaiyXsde",
+            "documentCollection": "pf2e.deities",
+            "documentId": "JgqH3BhuEuA4Zyqs",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                5,
+                5
+            ],
+            "text": "Desna",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "FBEL6XZeXxFi3aeq",
+            "documentCollection": "pf2e.deities",
+            "documentId": "mm1j6UbHqFCI8fwB",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                6,
+                6
+            ],
+            "text": "Erastil",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "G39oEhSnCbRZ4CIl",
+            "documentCollection": "pf2e.deities",
+            "documentId": "88vRw2ZVPax4hhga",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                7,
+                7
+            ],
+            "text": "Gorum",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "9l3dM8TMwp9lXPIg",
+            "documentCollection": "pf2e.deities",
+            "documentId": "swwwP7eVmlNuWTb7",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                8,
+                8
+            ],
+            "text": "Gozreh",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "X0ypYqZFczB02Lr8",
+            "documentCollection": "pf2e.deities",
+            "documentId": "eErEiVmBqltYXFJ6",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                9,
+                9
+            ],
+            "text": "Iomedae",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "rPGeCpfgbR06cpFt",
+            "documentCollection": "pf2e.deities",
+            "documentId": "qqqrbq4uCrelQvgH",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                10,
+                10
+            ],
+            "text": "Irori",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "oimHgFzKvRt5OZYO",
+            "documentCollection": "pf2e.deities",
+            "documentId": "aipkJQxP4GBsTaGq",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                11,
+                11
+            ],
+            "text": "Lamashtu",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "GGup7z70AsqmuOoI",
+            "documentCollection": "pf2e.deities",
+            "documentId": "9EKyWmjLUu42evxC",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                12,
+                12
+            ],
+            "text": "Nethys",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "3OfoDxs5aiB2TBx4",
+            "documentCollection": "pf2e.deities",
+            "documentId": "GX6PF9ifR47Xyjg9",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                13,
+                13
+            ],
+            "text": "Norgorber",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "2YHxnzLGnDliU84g",
+            "documentCollection": "pf2e.deities",
+            "documentId": "QZD0u1jxwz0kj8uI",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                14,
+                14
+            ],
+            "text": "Pharasma",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "chScvgmLU7t4j9vo",
+            "documentCollection": "pf2e.deities",
+            "documentId": "Bhxji0kxIbMKqdkw",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                15,
+                15
+            ],
+            "text": "Rovagug",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "zrqczOafDdChiYsa",
+            "documentCollection": "pf2e.deities",
+            "documentId": "BNycwu3I21dTh4D9",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                16,
+                16
+            ],
+            "text": "Sarenrae",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "orkv9dfC64FXd9XF",
+            "documentCollection": "pf2e.deities",
+            "documentId": "gxwmzxUWBOhdgFSN",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                17,
+                17
+            ],
+            "text": "Shelyn",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "0Kh7WCuYNIkpzbTx",
+            "documentCollection": "pf2e.deities",
+            "documentId": "sZrdzh0ANQnZGXJb",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                18,
+                18
+            ],
+            "text": "Torag",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "zSUyJ0XeV1jx7xHm",
+            "documentCollection": "pf2e.deities",
+            "documentId": "22n3N47sqbqbDxbp",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                19,
+                19
+            ],
+            "text": "Urgathoa",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "mTwxg7eNM3b39AfW",
+            "documentCollection": "pf2e.deities",
+            "documentId": "ZfN7jkK6boU1FuiS",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                20,
+                20
+            ],
+            "text": "Zon-Kuthon",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "GcNnH1lBPNBpSdd1",
+            "documentCollection": "pf2e.deities",
+            "documentId": "KT7HKL7vbZEwbzX4",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                21,
+                21
+            ],
+            "text": "Green Faith",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "5zcOYRix3hgW3OFN",
+            "documentCollection": "pf2e.deities",
+            "documentId": "lZ74P8kUA1ti808w",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                22,
+                22
+            ],
+            "text": "Prophecies of Kalistrade",
+            "type": 2,
+            "weight": 1
+        },
+        {
+            "_id": "jczEcxKI1STdwzuy",
+            "documentCollection": "pf2e.deities",
+            "documentId": "EUOAV02rHz96jMPh",
+            "drawn": false,
+            "img": "icons/svg/d20-black.svg",
+            "range": [
+                23,
+                23
+            ],
+            "text": "Whispering Way",
+            "type": 2,
+            "weight": 1
+        }
+    ]
+}

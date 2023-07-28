@@ -1,0 +1,13 @@
+{
+    "_id": "tbveXG4gaIoKnsWX",
+    "actorIds": [],
+    "author": "j8qxwRz5RJ4kkzp9",
+    "command": "game.pf2e.actions.request({ event: event });",
+    "img": "icons/svg/dice-target.svg",
+    "name": "Request: Diplomacy",
+    "ownership": {
+        "default": 1
+    },
+    "scope": "global",
+    "type": "script"
+}

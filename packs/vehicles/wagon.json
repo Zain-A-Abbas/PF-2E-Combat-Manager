@@ -1,0 +1,75 @@
+{
+    "_id": "UNOwkQq5lc4cYdZP",
+    "img": "systems/pf2e/icons/default-icons/vehicle.svg",
+    "items": [],
+    "name": "Wagon",
+    "system": {
+        "attributes": {
+            "ac": {
+                "check": 0,
+                "details": "",
+                "value": 11
+            },
+            "collisionDC": {
+                "value": 15
+            },
+            "collisionDamage": {
+                "value": "2d6"
+            },
+            "hardness": 5,
+            "hp": {
+                "details": "",
+                "max": 18,
+                "temp": 0,
+                "value": 18
+            },
+            "immunities": [
+                {
+                    "type": "critical-hits"
+                },
+                {
+                    "type": "object-immunities"
+                },
+                {
+                    "type": "precision"
+                }
+            ]
+        },
+        "details": {
+            "AC": 0,
+            "crew": "1 pilot",
+            "description": "",
+            "level": {
+                "value": 1
+            },
+            "passengers": "2",
+            "pilotingCheck": "Driving Lore (DC 15) or Nature (DC 17 to DC 25, depending on the pulling creature)",
+            "price": "25",
+            "space": {
+                "high": 7,
+                "long": 10,
+                "wide": 10
+            },
+            "speed": "the Speed of the slowest pulling creature (pulled by 2 Large creatures)"
+        },
+        "saves": {
+            "fortitude": {
+                "item": 0,
+                "rank": 0,
+                "saveDetail": "",
+                "value": 7
+            }
+        },
+        "source": {
+            "value": "Pathfinder Gamemastery Guide"
+        },
+        "traits": {
+            "rarity": "common",
+            "size": {
+                "value": "lg"
+            },
+            "value": []
+        }
+    },
+    "type": "vehicle"
+}

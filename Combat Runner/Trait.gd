@@ -9,6 +9,7 @@ const uncommon_trait = preload("res://Themes/TraitStyleboxes/UncommonTrait.tres"
 const rare_trait = preload("res://Themes/TraitStyleboxes/RareTrait.tres")
 const size_trait = preload("res://Themes/TraitStyleboxes/SizeTrait.tres")
 const alignment_trait = preload("res://Themes/TraitStyleboxes/AlignmentTrait.tres")
+const unique_trait = preload("res://Themes/TraitStyleboxes/UniqueTrait.tres")
 
 func set_trait(val):
 	if !trait_text:
@@ -29,6 +30,8 @@ func set_trait(val):
 			add_theme_stylebox_override("panel", size_trait)
 		"LG", "NG", "CG", "LN", "N", "CN", "LE", "N", "CE":
 			add_theme_stylebox_override("panel", alignment_trait)
+		"UNIQUE":
+			add_theme_stylebox_override("panel", unique_trait)
 		_:
 			add_theme_stylebox_override("panel", regular_trait)
 

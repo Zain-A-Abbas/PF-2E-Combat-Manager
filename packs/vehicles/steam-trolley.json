@@ -1,0 +1,75 @@
+{
+    "_id": "slkeDT68Zjmzz5l5",
+    "img": "systems/pf2e/icons/default-icons/vehicle.svg",
+    "items": [],
+    "name": "Steam Trolley",
+    "system": {
+        "attributes": {
+            "ac": {
+                "check": 0,
+                "details": "",
+                "value": 15
+            },
+            "collisionDC": {
+                "value": 19
+            },
+            "collisionDamage": {
+                "value": "3d8"
+            },
+            "hardness": 5,
+            "hp": {
+                "details": "",
+                "max": 50,
+                "temp": 0,
+                "value": 50
+            },
+            "immunities": [
+                {
+                    "type": "critical-hits"
+                },
+                {
+                    "type": "object-immunities"
+                },
+                {
+                    "type": "precision"
+                }
+            ]
+        },
+        "details": {
+            "AC": 0,
+            "crew": "1 pilot, 1 crew",
+            "description": "<p>A steam trolley is essentially a much bigger steam cart, with a heavier-duty alchemical cauldron and furnace feeding into a larger steam engine.</p>",
+            "level": {
+                "value": 4
+            },
+            "passengers": "6",
+            "pilotingCheck": "Driving Lore (DC 19) or Crafting (DC 21)",
+            "price": 250,
+            "space": {
+                "high": 8,
+                "long": 15,
+                "wide": 10
+            },
+            "speed": "25 feet (alchemical)"
+        },
+        "saves": {
+            "fortitude": {
+                "item": 0,
+                "rank": 0,
+                "saveDetail": "",
+                "value": 11
+            }
+        },
+        "source": {
+            "value": "Pathfinder Guns & Gears"
+        },
+        "traits": {
+            "rarity": "rare",
+            "size": {
+                "value": "lg"
+            },
+            "value": []
+        }
+    },
+    "type": "vehicle"
+}

@@ -134,6 +134,6 @@ layout_mode = 2
 [node name="HSeparator2" type="HSeparator" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
 layout_mode = 2
 
-[node name="MeleeRangedAttacks" type="VBoxContainer" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
+[node name="Speed&OffensiveAbilities" type="VBoxContainer" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
 visible = false
 layout_mode = 2

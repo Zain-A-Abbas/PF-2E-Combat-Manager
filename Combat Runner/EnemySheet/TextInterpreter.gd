@@ -46,11 +46,18 @@ func remove_unnecessary(ability_text: String) -> String:
 # Turns bursts, cones, etc. into a readable format
 func area_parser(ability_text: String) -> String:
 	var regex = RegEx.new()
-	regex.compile("@Template\\[type:(\\w+)\\|distance:(\\w+)]{([^}]*)}")
+	regex.compile("@Template\\[type:(\\w+)\\|distance:(\\w+)](?:{([^}]*)})?")
 	if regex.search(ability_text) == null:
 		return ability_text
 	var area_text = regex.search(ability_text).strings
-	return area_parser(regex.sub(ability_text, area_text[3]))
+	var area_result
+	
+	# Makes it so "emanation" is not said
+	if area_text[1] != "emanation":
+		area_result = area_text[2] + " feet " + area_text[1]
+	else:
+		area_result = area_text[2] + " feet"
+	return area_parser(regex.sub(ability_text, area_result))
 
 # Recursive function that keeps sifting through the description for condition text
 func condition_parser(description_text: String) -> String:
@@ -84,7 +91,6 @@ func save_parser(description_text: String) -> String:
 	var save_strings = regex.search(description_text)
 	if regex.search(description_text) == null:
 		return description_text
-	print(regex.search(description_text).strings[2])
 	var saving_text: String = "DC " + regex.search(description_text).strings[2]
 	for string in save_strings.strings:
 		if string.contains("basic:true"):

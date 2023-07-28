@@ -1,0 +1,12 @@
+{
+    "_id": "FlM3HvpnsZpCKawG",
+    "author": "qZdAigNsA8Xx4gAx",
+    "command": "game.pf2e.actions.hide({ event: event });",
+    "img": "icons/svg/dice-target.svg",
+    "name": "Hide: Stealth",
+    "ownership": {
+        "default": 1
+    },
+    "scope": "global",
+    "type": "script"
+}
