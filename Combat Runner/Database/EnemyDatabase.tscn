@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmbtqllw2ypjc"]
+
+[ext_resource type="PackedScene" uid="uid://kg3x603pe2ss" path="res://EnemySheet.tscn" id="1_bdhe6"]
+[ext_resource type="Script" path="res://Database/EnemyDatabase.gd" id="1_oki1l"]
+
+[node name="EnemyDatabase" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oki1l")
+
+[node name="Database" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SortingFiltering" type="HBoxContainer" parent="Database"]
+layout_mode = 2
+
+[node name="DatabaseSheets" type="HBoxContainer" parent="Database"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EnemyList" type="ItemList" parent="Database/DatabaseSheets"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EnemySheet" parent="Database/DatabaseSheets" instance=ExtResource("1_bdhe6")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+
+[connection signal="item_selected" from="Database/DatabaseSheets/EnemyList" to="." method="_on_enemy_list_item_selected"]

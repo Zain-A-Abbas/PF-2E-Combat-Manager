@@ -1,0 +1,156 @@
+[gd_scene load_steps=8 format=3 uid="uid://dp0drwiihwcev"]
+
+[ext_resource type="Script" path="res://Combat/EnemyInfoTemplate.gd" id="1_7cgx7"]
+[ext_resource type="Theme" uid="uid://bsaqql2vu2wau" path="res://Themes/EnemyTracker.tres" id="1_ayg27"]
+[ext_resource type="Script" path="res://Combat/HPBar.gd" id="1_pktmf"]
+[ext_resource type="Theme" uid="uid://deur64cv551t" path="res://Themes/EnemyHP.tres" id="2_bymrl"]
+[ext_resource type="Theme" uid="uid://bucbvtpc225di" path="res://Themes/Theme1.tres" id="3_p6xjd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_55eia"]
+bg_color = Color(1, 0.384314, 0.423529, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3ewb7"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="EnemyTracker" type="PanelContainer"]
+custom_minimum_size = Vector2(800, 0)
+offset_right = 800.0
+offset_bottom = 80.0
+script = ExtResource("1_7cgx7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0, 0.145098, 0.392157, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Control" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Control"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+
+[node name="HPBarControl" type="Control" parent="HBoxContainer/Control/MarginContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="HPBar" type="ProgressBar" parent="HBoxContainer/Control/MarginContainer/HPBarControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.294118, 0.294118, 0.294118, 1)
+theme_override_styles/background = SubResource("StyleBoxFlat_55eia")
+theme_override_styles/fill = SubResource("StyleBoxFlat_3ewb7")
+value = 70.0
+script = ExtResource("1_pktmf")
+metadata/_edit_lock_ = true
+
+[node name="EnemyName" type="LineEdit" parent="HBoxContainer/Control/MarginContainer/HPBarControl"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_bymrl")
+placeholder_text = "Enemy Name"
+clear_button_enabled = true
+caret_blink = true
+caret_blink_interval = 0.5
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/Control"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/Control/MarginContainer2"]
+layout_mode = 2
+theme = ExtResource("3_p6xjd")
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Control/MarginContainer2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Control/MarginContainer2/PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="CurrentHPLabel" type="Label" parent="HBoxContainer/Control/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "HP"
+vertical_alignment = 1
+
+[node name="CurrentHP" type="LineEdit" parent="HBoxContainer/Control/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_ayg27")
+text = "100"
+placeholder_text = " ---"
+alignment = 2
+
+[node name="MaxHPLabel" type="Label" parent="HBoxContainer/Control/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "MAX"
+vertical_alignment = 1
+
+[node name="MaxHP" type="LineEdit" parent="HBoxContainer/Control/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_ayg27")
+text = "100"
+placeholder_text = " ---"
+alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Control/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="DamageLabel" type="Label" parent="HBoxContainer/Control/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "DAMAGE"
+vertical_alignment = 1
+
+[node name="Damage" type="LineEdit" parent="HBoxContainer/Control/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_ayg27")
+text = "0"
+placeholder_text = " ---"
+alignment = 2
+
+[node name="DamageButton" type="Button" parent="HBoxContainer/Control/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_p6xjd")
+text = " APPLY "
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+
+[node name="Button" type="Button" parent="HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_vertical = 0
+theme = ExtResource("3_p6xjd")
+theme_override_font_sizes/font_size = 24
+text = "X"
+
+[connection signal="text_changed" from="HBoxContainer/Control/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/CurrentHP" to="." method="_on_current_hp_text_changed"]
+[connection signal="pressed" from="HBoxContainer/Control/MarginContainer2/PanelContainer/MarginContainer/HBoxContainer/DamageButton" to="." method="_on_damage_button_pressed"]

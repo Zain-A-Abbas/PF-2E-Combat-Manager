@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bephoc2bc3atp"]
+[gd_scene load_steps=2 format=3 uid="uid://bephoc2bc3atp"]
 
 [ext_resource type="PackedScene" uid="uid://bekrgofys7uc7" path="res://Combat.tscn" id="1_4vf2w"]
-[ext_resource type="PackedScene" uid="uid://kg3x603pe2ss" path="res://EnemySheet.tscn" id="2_oru3s"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -20,21 +19,13 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0941176, 0.0901961, 0.160784, 1)
 
-[node name="Combat" parent="." instance=ExtResource("1_4vf2w")]
+[node name="TabBar" type="TabContainer" parent="."]
 layout_mode = 1
-anchors_preset = -1
-offset_left = 4.0
-offset_top = 60.0
-offset_right = -4.0
-offset_bottom = -4.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="EnemySheet" parent="." instance=ExtResource("2_oru3s")]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.1
-anchor_right = 0.995
-anchor_bottom = 0.975
-offset_left = 950.0
-offset_right = -0.400024
-offset_bottom = -272.0
+[node name="Combat" parent="TabBar" instance=ExtResource("1_4vf2w")]
+layout_mode = 2

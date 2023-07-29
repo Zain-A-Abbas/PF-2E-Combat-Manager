@@ -8,6 +8,9 @@ func ability_parser(ability_text: String) -> String:
 	parsed_description = area_parser(parsed_description)
 	parsed_description = condition_parser(parsed_description)
 	parsed_description = damage_parser(parsed_description)
+	parsed_description = damage_parser2(parsed_description)
+	parsed_description = damage_parser3(parsed_description)
+	parsed_description = spell_parser(parsed_description)
 	parsed_description = save_parser(parsed_description)
 	parsed_description = recharge_parser(parsed_description)
 	parsed_description = format_parser(parsed_description)
@@ -22,7 +25,7 @@ func remove_unnecessary(ability_text: String) -> String:
 	var parsed_description = regex.sub(ability_text, " ", true)
 	
 	# Gets rid of html codes
-	regex.compile("(<hr \\/>|<p>|<\\/p>)")
+	regex.compile("(<hr \\/>|<p>|<\\/p>|<em>|<\\/em>)")
 	parsed_description = regex.sub(parsed_description, "", true)
 	
 	# Gets rid of unnecessary ability text
@@ -83,6 +86,38 @@ func damage_parser(description_text: String) -> String:
 		return description_text
 	var damage_text = damage_strings.strings[1] + " " + damage_strings.strings[2]
 	return damage_parser(regex.sub(description_text, damage_text))
+
+# Gets damage from @Damage[xdy[element]]
+func damage_parser2(description_text: String) -> String:
+	var regex = RegEx.new()
+	regex.compile("@Damage\\[(.*?)\\[(.*?)]]")
+	var damage_strings = regex.search(description_text)
+	if regex.search(description_text) == null:
+		return description_text
+	var damage_text = damage_strings.strings[1] + " " + damage_strings.strings[2]
+	return damage_parser2(regex.sub(description_text, damage_text))
+
+# Gets damage from [[/r xdy[[element]]{more stuff}
+	# Having 3 functions for this is not nice but it is a lot faster than making the regex even more gritty
+func damage_parser3(description_text: String) -> String:
+	var regex = RegEx.new()
+	regex.compile("\\[\\[/r (.*?)]]{([^}]*)}")
+	var damage_strings = regex.search(description_text)
+	if regex.search(description_text) == null:
+		return description_text
+	var damage_text = damage_strings.strings[2]
+	return damage_parser3(regex.sub(description_text, damage_text))
+
+# Gets spell names from @UUID[Compendium.pf2e.spells-srd.Item.X]
+# TD: Add URL here for spell previews.
+func spell_parser(description_text: String) -> String:
+	var regex = RegEx.new()
+	regex.compile("@UUID\\[Compendium\\.pf2e\\.spells-srd\\.Item\\.(.*?)\\]")
+	var damage_strings = regex.search(description_text)
+	if regex.search(description_text) == null:
+		return description_text
+	var spell_text = damage_strings.strings[1]
+	return spell_parser(regex.sub(description_text, spell_text))
 
 # Get saves from @Check[type:X|dc:Y|Z]
 func save_parser(description_text: String) -> String:

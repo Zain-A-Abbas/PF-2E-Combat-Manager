@@ -1,0 +1,26 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://deur64cv551t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p6u52"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.188235, 0.737255, 0.992157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j3tql"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.709804, 0.709804, 0.709804, 1)
+
+[resource]
+LineEdit/colors/caret_color = Color(0, 0, 0, 1)
+LineEdit/colors/clear_button_color = Color(0.145098, 0.145098, 0.145098, 1)
+LineEdit/colors/clear_button_color_pressed = Color(0.490196, 0.490196, 0.490196, 1)
+LineEdit/colors/font_color = Color(0, 0, 0, 1)
+LineEdit/colors/font_placeholder_color = Color(0.152941, 0.152941, 0.152941, 0.6)
+LineEdit/styles/focus = SubResource("StyleBoxFlat_p6u52")
+LineEdit/styles/normal = SubResource("StyleBoxFlat_j3tql")

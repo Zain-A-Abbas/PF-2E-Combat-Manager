@@ -29,12 +29,9 @@ var enemy_attributes
 @onready var attacks := $"SheetData/SheetScroller/SheetInfo/SheetMargin/Data/Speed&OffensiveAbilities"
 
 
-func _ready():
-	setup()
-
-func setup():
+func setup(enemy_file_location: String):
 	# Gets the enemy sheet data
-	var enemy_file = FileAccess.open("res://Data/Enemies/eobald.json", FileAccess.READ)
+	var enemy_file = FileAccess.open(enemy_file_location, FileAccess.READ)
 	var json_conversion = JSON.new()
 	json_conversion.parse(enemy_file.get_as_text())
 	enemy_data = json_conversion.get_data()
@@ -231,6 +228,8 @@ func setup_ac_saves():
 
 func setup_hp_immunities_weaknesses():
 	hp_resistances.text = "[b]HP[/b] " + str(enemy_attributes["hp"]["max"])
+	if enemy_attributes["hp"].has("details"):
+		hp_resistances.text += " (" + enemy_attributes["hp"]["details"] + ")"
 	
 	if enemy_attributes.has("immunities"):
 		hp_resistances.text += "; "
@@ -246,9 +245,42 @@ func setup_hp_immunities_weaknesses():
 	if enemy_attributes.has("resistances"):
 		hp_resistances.text += "; "
 		hp_resistances.text += "[b]Resistances[/b] "
+		# Enabled at different points so double vs can show up with or without weakness exceptions
+		var double_vs: bool = false
 		var i: int = 0
 		for resistance in enemy_attributes["resistances"]:
-			hp_resistances.text += resistance["type"] + str(resistance["value"])
+			hp_resistances.text += resistance["type"] + " " + str(resistance["value"])
+			var j: int = 0
+			if resistance.has("exceptions"):
+				hp_resistances.text += " (except "
+				for exception in resistance["exceptions"]:
+					hp_resistances.text += exception
+					j += 1
+					if j < resistance["exceptions"].size():
+						hp_resistances.text += ", "
+					else:
+						if resistance.has("doubleVs"):
+							double_vs = true
+							hp_resistances.text += "; double resistance vs. "
+							var k: int = 0
+							for double_versus in resistance["doubleVs"]:
+								hp_resistances.text += double_versus
+								k += 1
+								if k < resistance["doubleVs"].size():
+									hp_resistances.text += ", "
+						hp_resistances.text += ")"
+			
+			if resistance.has("doubleVs") && !double_vs:
+				double_vs = true
+				hp_resistances.text += "(double resistance vs. "
+				var k: int = 0
+				for double_versus in resistance["doubleVs"]:
+					hp_resistances.text += double_versus
+					k += 1
+					if k < resistance["doubleVs"].size():
+						hp_resistances.text += ", "
+					else:
+						hp_resistances.text += ")"
 			i += 1
 			if i < enemy_attributes["resistances"].size():
 				hp_resistances.text += ", "
@@ -288,9 +320,20 @@ func setup_other_defensive_abilities():
 		
 		# Add name and reaction icon if applicable
 		var ability_name = "[b]" + ability["name"] + "[/b] "
-		var ability_icon: String = ""
+		var action_icon: String = ""
 		if ability["system"]["actionType"]["value"] == "reaction":
-			ability_icon = REACTION + " "
+			action_icon = REACTION + " "
+		elif ability["system"]["actionType"]["value"] == "free":
+			action_icon = FREE_ACTION + " "
+		elif ability["system"]["actions"]["value"] != null:
+			var action_count = ability["system"]["actions"]["value"]
+			match int(action_count):
+				1:
+					action_icon = ONE_ACTION + " "
+				2:
+					action_icon = TWO_ACTIVITY + " "
+				3:
+					action_icon = THREE_ACTIVITY + " "
 		
 		# Add traits
 		var ability_traits: String = "("
@@ -306,7 +349,7 @@ func setup_other_defensive_abilities():
 		
 		# Add description
 		var desc_text = text_interpreter.ability_parser(ability["system"]["description"]["value"])
-		new_ability_entry.text = ability_name + ability_icon + ability_traits + desc_text
+		new_ability_entry.text = ability_name + action_icon + ability_traits + desc_text
 		defensive_abilities.add_child(new_ability_entry)
 	if defensive_abilities.get_child_count() > 0:
 		defensive_abilities.visible = true
@@ -378,6 +421,8 @@ func setup_attacks():
 				if i < ability["system"]["traits"]["value"].size():
 					attack_traits += ", "
 			attack_traits += ") "
+			if attack_traits == "() ":
+				attack_traits = ""
 			
 			# Damage
 			var damage_text: String = "[b]Damage[/b] "
@@ -432,14 +477,14 @@ func setup_spells():
 			continue
 		if spell["system"]["traits"]["value"].has("cantrip") || spell["name"].contains("(Constant)"):
 			continue
+		var spell_level: int
 		if spell["system"]["location"].has("heightenedLevel"):
-			var spell_level: int = spell["system"]["location"]["heightenedLevel"]
-			if !spell_levels.has(spell_level):
-				spell_levels.append(spell_level)
+			spell_level = spell["system"]["location"]["heightenedLevel"]
 		else:
-			var spell_level: int = spell["system"]["level"]["value"]
-			if !spell_levels.has(spell_level):
-				spell_levels.append(spell_level)
+			spell_level = spell["system"]["level"]["value"]
+			
+		if !spell_levels.has(spell_level):
+			spell_levels.append(spell_level)
 	spell_levels.sort()
 	spell_levels.reverse()
 	
@@ -453,15 +498,24 @@ func setup_spells():
 				continue
 			if spell["system"]["traits"]["value"].has("cantrip") || spell["name"].contains("(Constant)"):
 				continue
-			
+			# Adds the post-heightening level; the databse uses both of these to heighten. IDK why.
+			var this_spell_level: int
 			if spell["system"]["location"].has("heightenedLevel"):
-				var this_spell_level: int = spell["system"]["location"]["heightenedLevel"]
-				if this_spell_level == spell_level:
-					spell_level_text += spell["name"].to_lower() + ", "
+				this_spell_level = spell["system"]["location"]["heightenedLevel"]
 			else:
-				var this_spell_level: int = spell["system"]["level"]["value"]
-				if this_spell_level == spell_level:
-					spell_level_text += spell["name"].to_lower() + ", "
+				this_spell_level = spell["system"]["level"]["value"]
+				
+			
+			if this_spell_level == spell_level:
+				spell_level_text += spell["name"].to_lower()
+			else:
+				continue
+			
+			# Adds uses if a spell has multiple
+			if spell["system"]["location"].has("uses"):
+				spell_level_text += " [b](" + str(spell["system"]["location"]["uses"]["max"]) + "x)[/b]"
+			
+			spell_level_text += ", "
 		# Makes the last spell end with "; " instead of ", "
 		spell_level_text[-2] = ";"
 		spell_list.text += spell_level_text
@@ -496,7 +550,7 @@ func setup_spells():
 				this_spell_level = spell["system"]["location"]["heightenedLevel"]
 			else:
 				this_spell_level = spell["system"]["level"]["value"]
-			constant_text += spell["name"].substr(0, spell["name"].length() - 11) + " (" + ordinal_numbers(this_spell_level) + "), "
+			constant_text += spell["name"].replace(" (Constant)", "") + " (" + ordinal_numbers(this_spell_level) + "), "
 	if has_constant_spells:
 		constant_text[-2] = ""
 		spell_list.text += constant_text
