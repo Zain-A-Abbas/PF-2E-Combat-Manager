@@ -22,6 +22,16 @@ grow_vertical = 2
 
 [node name="SortingFiltering" type="HBoxContainer" parent="Database"]
 layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="Button" type="Button" parent="Database/SortingFiltering"]
+layout_mode = 2
+text = "Name"
+
+[node name="Button2" type="Button" parent="Database/SortingFiltering"]
+layout_mode = 2
+text = "Level"
 
 [node name="DatabaseSheets" type="HBoxContainer" parent="Database"]
 layout_mode = 2
@@ -36,4 +46,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
 
+[connection signal="pressed" from="Database/SortingFiltering/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Database/SortingFiltering/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="item_selected" from="Database/DatabaseSheets/EnemyList" to="." method="_on_enemy_list_item_selected"]

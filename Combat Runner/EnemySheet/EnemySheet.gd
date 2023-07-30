@@ -29,12 +29,9 @@ var enemy_attributes
 @onready var attacks := $"SheetData/SheetScroller/SheetInfo/SheetMargin/Data/Speed&OffensiveAbilities"
 
 
-func setup(enemy_file_location: String):
+func setup(enemy_file):
 	# Gets the enemy sheet data
-	var enemy_file = FileAccess.open(enemy_file_location, FileAccess.READ)
-	var json_conversion = JSON.new()
-	json_conversion.parse(enemy_file.get_as_text())
-	enemy_data = json_conversion.get_data()
+	enemy_data = enemy_file
 	
 	enemy_system = enemy_data["system"]
 	enemy_abilities = enemy_data["items"]
@@ -43,6 +40,8 @@ func setup(enemy_file_location: String):
 	# Set up name and level
 	enemy_name.text = enemy_data["name"]
 	enemy_level.text = "CREATURE " + str(enemy_system["details"]["level"]["value"])
+	
+	
 	
 	# Set up traits
 	setup_traits()
@@ -88,8 +87,14 @@ func setup_traits():
 		i += 1
 	
 	# Rarity
-	if trait_data["rarity"] != "common":
-		insert_trait(trait_data["rarity"].to_upper())
+	# It has the if-else because to designate if an enemy is unique or not sometimes it will 
+		# have the rarity set to "unique". other times it will not have a rarity variable at all.
+			# these are the mysteries
+	if trait_data.has("rarity"):
+		if trait_data["rarity"] != "common":
+			insert_trait(trait_data["rarity"].to_upper())
+	else:
+		insert_trait("UNIQUE")
 	
 	# Alignment
 	insert_trait(enemy_system["details"]["alignment"]["value"])
@@ -109,17 +114,24 @@ func insert_trait(trait_name: String):
 func setup_senses():
 	senses.text = ""
 	var perception = "[b]Perception[/b] " + "+" + "[url]" + str(enemy_system["attributes"]["perception"]["value"]) + "[/url]"
-	var enemy_senses = enemy_system["traits"]["senses"]["value"].split(",")
+	
+	var enemy_senses: Array
+	if enemy_system["traits"]["senses"] is Array:
+		enemy_senses = enemy_system["traits"]["senses"]
+	else:
+		enemy_senses = enemy_system["traits"]["senses"]["value"].split(",")
 	var i: int = 0
-	if enemy_senses[0] != "":
-		for sense in enemy_senses:
-			if sense[0] == " ":
-				enemy_senses[i] = sense.substr(1)
-			i += 1
+	if !enemy_senses.is_empty():
+		if enemy_senses[0] != "":
+			for sense in enemy_senses:
+				if sense[0] == " ":
+					enemy_senses[i] = sense.substr(1)
+				i += 1
 	
 	senses.text += perception
-	if enemy_senses[0] != "":
-		senses.text += "; "
+	if !enemy_senses.is_empty():
+		if enemy_senses[0] != "":
+			senses.text += "; "
 	
 	# Add tooltips to the senses
 	i = 0
@@ -223,13 +235,15 @@ func setup_ac_saves():
 		positive_negative = ""
 	ac_saves.text += "[b]Will[/b] " + positive_negative + "[url]" + str(enemy_system["saves"]["will"]["value"]) + "[/url]"
 	
-	if enemy_attributes["allSaves"]["value"] != "":
+	if enemy_attributes["allSaves"]["value"] != "" && enemy_attributes["allSaves"]["value"] != null:
 		ac_saves.text += "; " + enemy_attributes["allSaves"]["value"]
 
 func setup_hp_immunities_weaknesses():
 	hp_resistances.text = "[b]HP[/b] " + str(enemy_attributes["hp"]["max"])
 	if enemy_attributes["hp"].has("details"):
-		hp_resistances.text += " (" + enemy_attributes["hp"]["details"] + ")"
+		var extra_hp_info: String = " (" + enemy_attributes["hp"]["details"] + ")"
+		if extra_hp_info != " ()":
+			hp_resistances.text += " (" + enemy_attributes["hp"]["details"] + ")"
 	
 	if enemy_attributes.has("immunities"):
 		hp_resistances.text += "; "
@@ -451,7 +465,13 @@ func setup_spells():
 		if ability["type"] == "spellcastingEntry":
 			has_spells = true
 			spell_tradition_name = ability["name"]
-			dc = ability["system"]["spelldc"]["dc"]
+			if dc is int:
+				pass
+			else:
+				print("WHO THE FUCK ARE YOU")
+				print(enemy_data["name"])
+				print("AAA")
+			dc = int(ability["system"]["spelldc"]["dc"])
 			attack_roll = ability["system"]["spelldc"]["value"]
 	
 	if !has_spells:
@@ -528,7 +548,12 @@ func setup_spells():
 			continue
 		if spell["system"]["traits"]["value"].has("cantrip"):
 			if !has_cantrips:
-				cantrips_text += "[b]Cantrips (" + ordinal_numbers(spell_levels[0]) + ")[/b] "
+				var cantrip_level: int
+				if !spell_levels.is_empty():
+					cantrip_level = spell_levels[0]
+				else:
+					cantrip_level = int(ceil(enemy_system["details"]["level"]["value"] / 2))
+				cantrips_text += "[b]Cantrips (" + ordinal_numbers(cantrip_level) + ")[/b] "
 			has_cantrips = true
 			cantrips_text += spell["name"].to_lower() + ", "
 	if has_cantrips:
