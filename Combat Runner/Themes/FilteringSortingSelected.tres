@@ -1,0 +1,92 @@
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://du7nve8k4fmw2"]
+
+[ext_resource type="FontFile" uid="uid://deqhew2apixpi" path="res://Fonts/GOTHICB.TTF" id="1_l75b5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ysdtv"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mhjfq"]
+load_path = "res://.godot/imported/BlankTexture.png-698d2ae3dea0410b701981740c12d37c.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ky3oj"]
+load_path = "res://.godot/imported/BlankTexture.png-698d2ae3dea0410b701981740c12d37c.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_opyes"]
+load_path = "res://.godot/imported/BlankTexture.png-698d2ae3dea0410b701981740c12d37c.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4tnb5"]
+load_path = "res://.godot/imported/BlankTexture.png-698d2ae3dea0410b701981740c12d37c.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_7xbyl"]
+load_path = "res://.godot/imported/BlankTexture.png-698d2ae3dea0410b701981740c12d37c.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d8gqk"]
+load_path = "res://.godot/imported/BlankTexture.png-698d2ae3dea0410b701981740c12d37c.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_t1g6s"]
+load_path = "res://.godot/imported/BlankTexture.png-698d2ae3dea0410b701981740c12d37c.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_l3j8b"]
+load_path = "res://.godot/imported/BlankTexture.png-698d2ae3dea0410b701981740c12d37c.ctex"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1747j"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 4.0
+expand_margin_top = 1.0
+expand_margin_right = 4.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qeahr"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 4.0
+expand_margin_top = 1.0
+expand_margin_right = 4.0
+expand_margin_bottom = 1.0
+
+[resource]
+Button/fonts/font = ExtResource("1_l75b5")
+Button/styles/disabled = SubResource("StyleBoxEmpty_ysdtv")
+Button/styles/focus = SubResource("StyleBoxEmpty_ysdtv")
+Button/styles/hover = SubResource("StyleBoxEmpty_ysdtv")
+Button/styles/normal = SubResource("StyleBoxEmpty_ysdtv")
+Button/styles/pressed = SubResource("StyleBoxEmpty_ysdtv")
+CheckButton/colors/font_color = Color(0.945098, 0.92549, 0.898039, 1)
+CheckButton/colors/font_disabled_color = Color(0.945098, 0.92549, 0.898039, 1)
+CheckButton/colors/font_focus_color = Color(0.945098, 0.92549, 0.898039, 1)
+CheckButton/colors/font_hover_color = Color(0.945098, 0.92549, 0.898039, 1)
+CheckButton/colors/font_hover_pressed_color = Color(0.945098, 0.92549, 0.898039, 1)
+CheckButton/colors/font_outline_color = Color(0.945098, 0.92549, 0.898039, 1)
+CheckButton/colors/font_pressed_color = Color(0.945098, 0.92549, 0.898039, 1)
+CheckButton/icons/checked = SubResource("CompressedTexture2D_mhjfq")
+CheckButton/icons/checked_disabled = SubResource("CompressedTexture2D_ky3oj")
+CheckButton/icons/checked_disabled_mirrored = SubResource("CompressedTexture2D_opyes")
+CheckButton/icons/checked_mirrored = SubResource("CompressedTexture2D_4tnb5")
+CheckButton/icons/unchecked = SubResource("CompressedTexture2D_7xbyl")
+CheckButton/icons/unchecked_disabled = SubResource("CompressedTexture2D_d8gqk")
+CheckButton/icons/unchecked_disabled_mirrored = SubResource("CompressedTexture2D_t1g6s")
+CheckButton/icons/unchecked_mirrored = SubResource("CompressedTexture2D_l3j8b")
+CheckButton/styles/focus = SubResource("StyleBoxFlat_1747j")
+CheckButton/styles/hover = SubResource("StyleBoxFlat_1747j")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxFlat_1747j")
+CheckButton/styles/normal = SubResource("StyleBoxFlat_1747j")
+CheckButton/styles/pressed = SubResource("StyleBoxFlat_1747j")
+Label/colors/font_color = Color(1, 1, 1, 1)
+Label/fonts/font = ExtResource("1_l75b5")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_qeahr")

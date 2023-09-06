@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmbtqllw2ypjc"]
+[gd_scene load_steps=6 format=3 uid="uid://bmbtqllw2ypjc"]
 
 [ext_resource type="PackedScene" uid="uid://kg3x603pe2ss" path="res://EnemySheet.tscn" id="1_bdhe6"]
 [ext_resource type="Script" path="res://Database/EnemyDatabase.gd" id="1_oki1l"]
+[ext_resource type="FontFile" uid="uid://deqhew2apixpi" path="res://Fonts/GOTHICB.TTF" id="2_1phum"]
+[ext_resource type="Theme" uid="uid://usptm04bxef0" path="res://Themes/FilteringSorting.tres" id="2_etg7m"]
+[ext_resource type="PackedScene" uid="uid://t8owj6vh5x6r" path="res://Database/FilterOption.tscn" id="4_f6w0e"]
 
 [node name="EnemyDatabase" type="Control"]
 layout_mode = 3
@@ -12,6 +15,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_oki1l")
 
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.945098, 0.92549, 0.898039, 1)
+
 [node name="Database" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -19,19 +31,68 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
-[node name="SortingFiltering" type="HBoxContainer" parent="Database"]
+[node name="MarginContainer" type="MarginContainer" parent="Database"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.05
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 6
 
-[node name="Button" type="Button" parent="Database/SortingFiltering"]
+[node name="SortingFiltering" type="HBoxContainer" parent="Database/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_etg7m")
+theme_override_constants/separation = 12
+
+[node name="SortBy" type="Label" parent="Database/MarginContainer/SortingFiltering"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_1phum")
+text = "Sort by:"
+
+[node name="Button" type="Button" parent="Database/MarginContainer/SortingFiltering"]
 layout_mode = 2
 text = "Name"
 
-[node name="Button2" type="Button" parent="Database/SortingFiltering"]
+[node name="Button2" type="Button" parent="Database/MarginContainer/SortingFiltering"]
 layout_mode = 2
 text = "Level"
+
+[node name="Filters" type="Label" parent="Database/MarginContainer/SortingFiltering"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_1phum")
+text = "Filters:"
+
+[node name="NumbersFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+layout_mode = 2
+filter_name = "Numbers"
+
+[node name="CreaturesFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+layout_mode = 2
+filter_name = "Creature families"
+
+[node name="RarityFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+layout_mode = 2
+filter_name = "Rarity"
+
+[node name="SizeFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+layout_mode = 2
+filter_name = "Sizes"
+
+[node name="SourceFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+layout_mode = 2
+filter_name = "Sources"
+
+[node name="SaveFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+layout_mode = 2
+filter_name = "Strongest / Weakest saves"
+
+[node name="TraitFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+layout_mode = 2
+filter_name = "Traits"
 
 [node name="DatabaseSheets" type="HBoxContainer" parent="Database"]
 layout_mode = 2
@@ -46,6 +107,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
 
-[connection signal="pressed" from="Database/SortingFiltering/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Database/SortingFiltering/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Database/MarginContainer/SortingFiltering/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Database/MarginContainer/SortingFiltering/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="item_selected" from="Database/DatabaseSheets/EnemyList" to="." method="_on_enemy_list_item_selected"]

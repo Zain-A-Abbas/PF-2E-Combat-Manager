@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bephoc2bc3atp"]
+[gd_scene load_steps=3 format=3 uid="uid://bephoc2bc3atp"]
 
 [ext_resource type="PackedScene" uid="uid://bekrgofys7uc7" path="res://Combat.tscn" id="1_4vf2w"]
+[ext_resource type="PackedScene" uid="uid://bmbtqllw2ypjc" path="res://Database/EnemyDatabase.tscn" id="2_np0t7"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -28,4 +29,8 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Combat" parent="TabBar" instance=ExtResource("1_4vf2w")]
+layout_mode = 2
+
+[node name="EnemyDatabase" parent="TabBar" instance=ExtResource("2_np0t7")]
+visible = false
 layout_mode = 2

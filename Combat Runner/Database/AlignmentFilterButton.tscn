@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://b48pvwy77epf"]
+
+[node name="Control" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1720.0
+offset_bottom = -1000.0
+grow_horizontal = 2
+grow_vertical = 2

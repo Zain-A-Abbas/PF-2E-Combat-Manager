@@ -1,0 +1,62 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://usptm04bxef0"]
+
+[ext_resource type="Texture2D" uid="uid://b5fdwfgi1bsnr" path="res://Themes/BlankTexture.png" id="1_ua5ba"]
+[ext_resource type="FontFile" uid="uid://deqhew2apixpi" path="res://Fonts/GOTHICB.TTF" id="2_22250"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v3ubd"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 4.0
+expand_margin_top = 1.0
+expand_margin_right = 4.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ocel"]
+bg_color = Color(0.0588235, 0.0588235, 0.0588235, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+expand_margin_left = 4.0
+expand_margin_top = 1.0
+expand_margin_right = 4.0
+expand_margin_bottom = 1.0
+
+[resource]
+CheckButton/colors/font_color = Color(0, 0, 0, 1)
+CheckButton/colors/font_disabled_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+CheckButton/colors/font_focus_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+CheckButton/colors/font_hover_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+CheckButton/colors/font_hover_pressed_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+CheckButton/colors/font_outline_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+CheckButton/colors/font_pressed_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+CheckButton/icons/checked = ExtResource("1_ua5ba")
+CheckButton/icons/checked_disabled = ExtResource("1_ua5ba")
+CheckButton/icons/checked_disabled_mirrored = ExtResource("1_ua5ba")
+CheckButton/icons/checked_mirrored = ExtResource("1_ua5ba")
+CheckButton/icons/unchecked = ExtResource("1_ua5ba")
+CheckButton/icons/unchecked_disabled = ExtResource("1_ua5ba")
+CheckButton/icons/unchecked_disabled_mirrored = ExtResource("1_ua5ba")
+CheckButton/icons/unchecked_mirrored = ExtResource("1_ua5ba")
+CheckButton/styles/disabled = SubResource("StyleBoxFlat_v3ubd")
+CheckButton/styles/focus = SubResource("StyleBoxFlat_v3ubd")
+CheckButton/styles/hover = SubResource("StyleBoxFlat_v3ubd")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxFlat_v3ubd")
+CheckButton/styles/normal = SubResource("StyleBoxFlat_v3ubd")
+CheckButton/styles/pressed = SubResource("StyleBoxFlat_v3ubd")
+Label/colors/font_color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+Label/fonts/font = ExtResource("2_22250")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_5ocel")

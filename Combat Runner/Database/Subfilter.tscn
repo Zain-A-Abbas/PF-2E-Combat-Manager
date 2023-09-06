@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=3 uid="uid://slrfberfilcb"]
+
+[ext_resource type="Script" path="res://Database/Subfilter.gd" id="1_mygxs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u4xac"]
+bg_color = Color(0.603922, 0.603922, 0.603922, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.462745, 0.462745, 0.462745, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="Subfilter" type="VBoxContainer"]
+script = ExtResource("1_mygxs")
+
+[node name="SubfilterLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Size"
+
+[node name="ResetButton" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Reset selection"
+
+[node name="ButtonsContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u4xac")
+
+[node name="MarginContainer" type="MarginContainer" parent="ButtonsContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="GridContainer" type="GridContainer" parent="ButtonsContainer/MarginContainer"]
+layout_mode = 2
+columns = 8
+
+[connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]

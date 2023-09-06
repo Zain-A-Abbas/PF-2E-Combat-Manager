@@ -14,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_hamg6")
 script = ExtResource("1_omui5")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -46,6 +47,7 @@ offset_left = -4.0
 offset_right = 4.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="SheetInfo" type="VBoxContainer" parent="SheetData/SheetScroller"]
 layout_mode = 2
@@ -59,14 +61,12 @@ theme = ExtResource("1_7o8fp")
 
 [node name="EnemyName" type="Label" parent="SheetData/SheetScroller/SheetInfo/Header"]
 layout_mode = 2
-theme = ExtResource("1_7o8fp")
 text = "FG"
 vertical_alignment = 1
 uppercase = true
 
 [node name="EnemyLevel" type="Label" parent="SheetData/SheetScroller/SheetInfo/Header"]
 layout_mode = 2
-theme = ExtResource("1_7o8fp")
 text = "Creature 18"
 horizontal_alignment = 2
 vertical_alignment = 1
@@ -91,17 +91,16 @@ layout_mode = 2
 
 [node name="Source" type="RichTextLabel" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
 layout_mode = 2
-theme = ExtResource("4_hamg6")
 bbcode_enabled = true
 text = "[b]Source[/b] [i]AAA[/i] "
 fit_content = true
 
 [node name="Senses" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data" instance=ExtResource("5_0yafw")]
 layout_mode = 2
+theme = null
 
 [node name="Languages" type="RichTextLabel" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
 layout_mode = 2
-theme = ExtResource("4_hamg6")
 bbcode_enabled = true
 text = "[b]Languages[/b] Common, Draconic"
 fit_content = true
@@ -110,10 +109,12 @@ info_type = 1
 
 [node name="Skills" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data" instance=ExtResource("5_0yafw")]
 layout_mode = 2
+theme = null
 text = "[b]Skills[/b] Athletics +28, Acrobatics +5"
 
 [node name="Abilities" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data" instance=ExtResource("5_0yafw")]
 layout_mode = 2
+theme = null
 text = "[b]STR[/b] +7"
 
 [node name="HSeparator" type="HSeparator" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
@@ -121,10 +122,12 @@ layout_mode = 2
 
 [node name="ACSaves" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data" instance=ExtResource("5_0yafw")]
 layout_mode = 2
+theme = null
 text = "[b]AC[/b] 42"
 
 [node name="HPResistances" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data" instance=ExtResource("5_0yafw")]
 layout_mode = 2
+theme = null
 text = "[b]HP[/b] 390"
 
 [node name="DefensiveAbilities" type="VBoxContainer" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
