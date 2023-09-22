@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmbtqllw2ypjc"]
+[gd_scene load_steps=7 format=3 uid="uid://bmbtqllw2ypjc"]
 
 [ext_resource type="PackedScene" uid="uid://kg3x603pe2ss" path="res://EnemySheet.tscn" id="1_bdhe6"]
 [ext_resource type="Script" path="res://Database/EnemyDatabase.gd" id="1_oki1l"]
 [ext_resource type="FontFile" uid="uid://deqhew2apixpi" path="res://Fonts/GOTHICB.TTF" id="2_1phum"]
 [ext_resource type="Theme" uid="uid://usptm04bxef0" path="res://Themes/FilteringSorting.tres" id="2_etg7m"]
 [ext_resource type="PackedScene" uid="uid://t8owj6vh5x6r" path="res://Database/FilterOption.tscn" id="4_f6w0e"]
+[ext_resource type="Theme" uid="uid://be3xj0wqsh8kv" path="res://Themes/FilterWindow.tres" id="5_ofgan"]
 
 [node name="EnemyDatabase" type="Control"]
 layout_mode = 3
@@ -93,6 +94,13 @@ filter_name = "Strongest / Weakest saves"
 [node name="TraitFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
 layout_mode = 2
 filter_name = "Traits"
+
+[node name="ResetButton" type="Button" parent="Database/MarginContainer/SortingFiltering"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme = ExtResource("5_ofgan")
+text = "Reset selection"
 
 [node name="DatabaseSheets" type="HBoxContainer" parent="Database"]
 layout_mode = 2

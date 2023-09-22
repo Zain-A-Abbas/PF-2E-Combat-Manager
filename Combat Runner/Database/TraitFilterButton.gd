@@ -8,22 +8,45 @@ const size_trait = preload("res://Themes/TraitStyleboxes/SizeTrait.tres")
 const alignment_trait = preload("res://Themes/TraitStyleboxes/AlignmentTrait.tres")
 const unique_trait = preload("res://Themes/TraitStyleboxes/UniqueTrait.tres")
 
+func _ready():
+	super._ready()
+
+
+
 func set_trait(val):
 	trait_name = val
 	if trait_text:
 		trait_text.text = val
 	size.x = 0
 	position = Vector2.ZERO
-	match val:
+	add_theme_stylebox_override("panel", get_trait_type())
+
+func get_trait_type():
+	match trait_name:
 		"RARE":
-			add_theme_stylebox_override("panel", rare_trait)
+			return rare_trait
 		"UNCOMMON":
-			add_theme_stylebox_override("panel", uncommon_trait)
+			return uncommon_trait
 		"TINY", "SMALL", "MEDIUM", "LARGE", "HUGE", "GARGANTUAN":
-			add_theme_stylebox_override("panel", size_trait)
+			return size_trait
 		"LG", "NG", "CG", "LN", "N", "CN", "LE", "NE", "CE":
-			add_theme_stylebox_override("panel", alignment_trait)
+			return alignment_trait
 		"UNIQUE":
-			add_theme_stylebox_override("panel", unique_trait)
+			return unique_trait
 		_:
-			add_theme_stylebox_override("panel", regular_trait)
+			return regular_trait
+
+
+
+
+func _on_button_mouse_entered():
+	# print("mouse in the house")
+	var new_stylebox = get_trait_type().duplicate()
+	new_stylebox.border_color = Color(0, 0, 0, 1.0)
+	add_theme_stylebox_override("panel", new_stylebox)
+
+
+
+func _on_button_mouse_exited():
+	#print("mouse out the house")
+	add_theme_stylebox_override("panel", get_trait_type())

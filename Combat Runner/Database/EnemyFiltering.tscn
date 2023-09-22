@@ -33,14 +33,11 @@ trait_name = "TINY"
 
 [node name="Small" parent="MarginContainer/FiltersContainer/Subfilter/ButtonsContainer/MarginContainer/GridContainer" index="1" instance=ExtResource("3_xxbua")]
 layout_mode = 2
-trait_name = "SMALL"
+trait_name = "LARGE"
 
-[node name="FilterButton" parent="MarginContainer/FiltersContainer/Subfilter/ButtonsContainer/MarginContainer/GridContainer" index="2" instance=ExtResource("4_cfq1x")]
+[node name="FilterButton2" parent="MarginContainer/FiltersContainer/Subfilter/ButtonsContainer/MarginContainer/GridContainer" index="2" instance=ExtResource("4_cfq1x")]
 layout_mode = 2
-trait_name = "onga"
-
-[node name="FilterButton2" parent="MarginContainer/FiltersContainer/Subfilter/ButtonsContainer/MarginContainer/GridContainer" index="3" instance=ExtResource("4_cfq1x")]
-layout_mode = 2
+trait_name = "UNCOMMON"
 
 [node name="ApplyButton" type="Button" parent="MarginContainer/FiltersContainer"]
 layout_direction = 3

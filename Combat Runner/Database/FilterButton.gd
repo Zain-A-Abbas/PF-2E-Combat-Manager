@@ -6,6 +6,8 @@ class_name FilterButton
 @onready var toggle_texture := $MarginContainer/HBoxContainer/ToggleTexture
 @export var trait_name: String = "UNCOMMON" : set = set_trait
 
+const FilterButtonTexture = preload ("res://Icons/FilterButton.tres")
+
 enum FilterState {
 	NONE,
 	INCLUDE,
@@ -16,6 +18,7 @@ var filter_state: FilterState = FilterState.NONE : set = set_filter_state
 
 func _ready():
 	trait_text.text = trait_name
+	toggle_texture.texture = FilterButtonTexture.duplicate()
 
 
 func set_trait(val):
@@ -33,7 +36,7 @@ func set_filter_state(val):
 	filter_state = new_val
 
 func reset():
-	filter_state = 0
+	filter_state = FilterState.NONE
 
 func _on_button_pressed():
 	filter_state += 1
