@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgcrgvgf7hi6f"]
+[gd_scene load_steps=6 format=3 uid="uid://bgcrgvgf7hi6f"]
 
 [ext_resource type="Theme" uid="uid://be3xj0wqsh8kv" path="res://Themes/FilterWindow.tres" id="1_ld3hk"]
 [ext_resource type="PackedScene" uid="uid://slrfberfilcb" path="res://Database/Subfilter.tscn" id="2_hewgo"]
+[ext_resource type="Script" path="res://Database/EnemyFiltering.gd" id="2_y8gwq"]
 [ext_resource type="PackedScene" uid="uid://en7jicp5pl3p" path="res://Database/TraitFilterButton.tscn" id="3_xxbua"]
 [ext_resource type="PackedScene" uid="uid://cl56ji7y065le" path="res://Database/FilterButton.tscn" id="4_cfq1x"]
 
@@ -9,6 +10,8 @@
 offset_right = 400.0
 offset_bottom = 100.0
 theme = ExtResource("1_ld3hk")
+script = ExtResource("2_y8gwq")
+metadata/_edit_lock_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

@@ -1,6 +1,7 @@
 extends Node
 class_name EnemyFilterData
 
+# File location
 var database_reference: String
 
 var creature_name: String
@@ -26,7 +27,20 @@ var alignment: String
 
 var rarity: String
 
-var size: String
+var size: String : get = get_size
+
+func get_size():
+	match size:
+		"sml":
+			return "small"
+		"med":
+			return "medium"
+		"lrg":
+			return "large"
+		"grg":
+			return "gargantuan"
+		_:
+			return size
 
 var traits: Array[String] = []
 

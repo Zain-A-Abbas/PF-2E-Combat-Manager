@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bmbtqllw2ypjc"]
+[gd_scene load_steps=8 format=3 uid="uid://bmbtqllw2ypjc"]
 
 [ext_resource type="PackedScene" uid="uid://kg3x603pe2ss" path="res://EnemySheet.tscn" id="1_bdhe6"]
 [ext_resource type="Script" path="res://Database/EnemyDatabase.gd" id="1_oki1l"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://usptm04bxef0" path="res://Themes/FilteringSorting.tres" id="2_etg7m"]
 [ext_resource type="PackedScene" uid="uid://t8owj6vh5x6r" path="res://Database/FilterOption.tscn" id="4_f6w0e"]
 [ext_resource type="Theme" uid="uid://be3xj0wqsh8kv" path="res://Themes/FilterWindow.tres" id="5_ofgan"]
+[ext_resource type="PackedScene" uid="uid://bvo7dlcc42sjo" path="res://Database/SizeFiltering.tscn" id="7_r2utg"]
 
 [node name="EnemyDatabase" type="Control"]
 layout_mode = 3
@@ -67,31 +68,33 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_1phum")
 text = "Filters:"
 
-[node name="NumbersFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+[node name="NumbersFilterButton" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
 layout_mode = 2
 filter_name = "Numbers"
 
-[node name="CreaturesFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+[node name="CreaturesFilterButton" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+visible = false
 layout_mode = 2
 filter_name = "Creature families"
 
-[node name="RarityFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+[node name="RarityFilterButton" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
 layout_mode = 2
 filter_name = "Rarity"
 
-[node name="SizeFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+[node name="SizeFilterButton" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
 layout_mode = 2
 filter_name = "Sizes"
 
-[node name="SourceFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+[node name="SourceFilterButton" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+visible = false
 layout_mode = 2
 filter_name = "Sources"
 
-[node name="SaveFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+[node name="SaveFilterButton" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
 layout_mode = 2
 filter_name = "Strongest / Weakest saves"
 
-[node name="TraitFilter" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
+[node name="TraitFilterButton" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
 layout_mode = 2
 filter_name = "Traits"
 
@@ -115,6 +118,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
 
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="SizeFilterMenu" parent="CenterContainer" instance=ExtResource("7_r2utg")]
+visible = false
+layout_mode = 2
+
 [connection signal="pressed" from="Database/MarginContainer/SortingFiltering/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Database/MarginContainer/SortingFiltering/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="button_pressed" from="Database/MarginContainer/SortingFiltering/SizeFilterButton" to="." method="_on_size_filter_button_button_pressed"]
 [connection signal="item_selected" from="Database/DatabaseSheets/EnemyList" to="." method="_on_enemy_list_item_selected"]
+[connection signal="apply_filter" from="CenterContainer/SizeFilterMenu" to="." method="_on_size_filter_menu_apply_filter"]
