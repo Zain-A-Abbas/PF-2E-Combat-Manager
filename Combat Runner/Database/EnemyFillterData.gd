@@ -31,11 +31,11 @@ var size: String : get = get_size
 
 func get_size():
 	match size:
-		"sml":
+		"sml", "sm":
 			return "small"
 		"med":
 			return "medium"
-		"lrg":
+		"lrg", "lg":
 			return "large"
 		"grg":
 			return "gargantuan"

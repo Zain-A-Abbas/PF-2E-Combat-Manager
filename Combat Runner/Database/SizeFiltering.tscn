@@ -43,12 +43,16 @@ text = "Sizes"
 layout_mode = 2
 script = ExtResource("3_uqko4")
 
-[node name="SubfilterLabel" type="Label" parent="MarginContainer/FiltersContainer/Subfilter"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/FiltersContainer/Subfilter"]
+layout_mode = 2
+
+[node name="SubfilterLabel" type="Label" parent="MarginContainer/FiltersContainer/Subfilter/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Size"
 
-[node name="ResetButton" type="Button" parent="MarginContainer/FiltersContainer/Subfilter"]
+[node name="ResetButton" type="Button" parent="MarginContainer/FiltersContainer/Subfilter/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Reset selection"
@@ -98,5 +102,5 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "Apply filters"
 
-[connection signal="pressed" from="MarginContainer/FiltersContainer/Subfilter/ResetButton" to="MarginContainer/FiltersContainer/Subfilter" method="_on_reset_button_pressed" flags=18]
+[connection signal="pressed" from="MarginContainer/FiltersContainer/Subfilter/HBoxContainer/ResetButton" to="MarginContainer/FiltersContainer/Subfilter" method="_on_reset_button_pressed" flags=18]
 [connection signal="pressed" from="MarginContainer/FiltersContainer/ApplyButton" to="." method="_on_apply_button_pressed"]

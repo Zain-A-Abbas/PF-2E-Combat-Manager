@@ -17,12 +17,15 @@ corner_radius_bottom_left = 2
 [node name="Subfilter" type="VBoxContainer"]
 script = ExtResource("1_mygxs")
 
-[node name="SubfilterLabel" type="Label" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="SubfilterLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "Size"
 
-[node name="ResetButton" type="Button" parent="."]
+[node name="ResetButton" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Reset selection"
@@ -43,4 +46,4 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 columns = 8
 
-[connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]

@@ -1,7 +1,7 @@
 extends VBoxContainer
 class_name Subfilter
 
-@onready var subfilter_label := $SubfilterLabel
+@onready var subfilter_label := $HBoxContainer/SubfilterLabel
 @onready var filter_buttons_container := $ButtonsContainer/MarginContainer/GridContainer
 
 # The name of the thing being filtered; Also used as the actual filter check

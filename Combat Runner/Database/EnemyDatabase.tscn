@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://Database/EnemyDatabase.gd" id="1_oki1l"]
 [ext_resource type="FontFile" uid="uid://deqhew2apixpi" path="res://Fonts/GOTHICB.TTF" id="2_1phum"]
 [ext_resource type="Theme" uid="uid://usptm04bxef0" path="res://Themes/FilteringSorting.tres" id="2_etg7m"]
-[ext_resource type="PackedScene" uid="uid://t8owj6vh5x6r" path="res://Database/FilterOption.tscn" id="4_f6w0e"]
 [ext_resource type="Theme" uid="uid://be3xj0wqsh8kv" path="res://Themes/FilterWindow.tres" id="5_ofgan"]
+[ext_resource type="PackedScene" uid="uid://bg2q2nt5lb8xs" path="res://Database/RarityFiltering.tscn" id="7_p2jkh"]
 [ext_resource type="PackedScene" uid="uid://bvo7dlcc42sjo" path="res://Database/SizeFiltering.tscn" id="7_r2utg"]
 
 [node name="EnemyDatabase" type="Control"]
@@ -68,40 +68,44 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_1phum")
 text = "Filters:"
 
-[node name="NumbersFilterButton" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
-layout_mode = 2
-filter_name = "Numbers"
-
-[node name="CreaturesFilterButton" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
-visible = false
-layout_mode = 2
-filter_name = "Creature families"
-
-[node name="RarityFilterButton" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
-layout_mode = 2
-filter_name = "Rarity"
-
-[node name="SizeFilterButton" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
-layout_mode = 2
-filter_name = "Sizes"
-
-[node name="SourceFilterButton" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
-visible = false
-layout_mode = 2
-filter_name = "Sources"
-
-[node name="SaveFilterButton" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
-layout_mode = 2
-filter_name = "Strongest / Weakest saves"
-
-[node name="TraitFilterButton" parent="Database/MarginContainer/SortingFiltering" instance=ExtResource("4_f6w0e")]
-layout_mode = 2
-filter_name = "Traits"
-
-[node name="ResetButton" type="Button" parent="Database/MarginContainer/SortingFiltering"]
+[node name="NumbersFilterButton" type="Button" parent="Database/MarginContainer/SortingFiltering"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+theme = ExtResource("5_ofgan")
+text = "Numbers"
+
+[node name="RarityFilterButton" type="Button" parent="Database/MarginContainer/SortingFiltering"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme = ExtResource("5_ofgan")
+text = "Rarity"
+
+[node name="SizeFilterButton" type="Button" parent="Database/MarginContainer/SortingFiltering"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme = ExtResource("5_ofgan")
+text = "Size"
+
+[node name="SavesFilterButton" type="Button" parent="Database/MarginContainer/SortingFiltering"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme = ExtResource("5_ofgan")
+text = "Strongest / Weakest Saves"
+
+[node name="TraitsFilterButton" type="Button" parent="Database/MarginContainer/SortingFiltering"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme = ExtResource("5_ofgan")
+text = "Traits"
+
+[node name="ResetButton2" type="Button" parent="Database/MarginContainer/SortingFiltering"]
+layout_mode = 2
+size_flags_horizontal = 0
 theme = ExtResource("5_ofgan")
 text = "Reset selection"
 
@@ -132,8 +136,14 @@ metadata/_edit_lock_ = true
 visible = false
 layout_mode = 2
 
+[node name="RarityFilterMenu" parent="CenterContainer" instance=ExtResource("7_p2jkh")]
+visible = false
+layout_mode = 2
+
 [connection signal="pressed" from="Database/MarginContainer/SortingFiltering/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Database/MarginContainer/SortingFiltering/Button2" to="." method="_on_button_2_pressed"]
-[connection signal="button_pressed" from="Database/MarginContainer/SortingFiltering/SizeFilterButton" to="." method="_on_size_filter_button_button_pressed"]
+[connection signal="pressed" from="Database/MarginContainer/SortingFiltering/RarityFilterButton" to="." method="_on_rarity_filter_button_pressed"]
+[connection signal="pressed" from="Database/MarginContainer/SortingFiltering/SizeFilterButton" to="." method="_on_size_filter_button_pressed"]
 [connection signal="item_selected" from="Database/DatabaseSheets/EnemyList" to="." method="_on_enemy_list_item_selected"]
 [connection signal="apply_filter" from="CenterContainer/SizeFilterMenu" to="." method="_on_size_filter_menu_apply_filter"]
+[connection signal="apply_filter" from="CenterContainer/RarityFilterMenu" to="." method="_on_rarity_filter_menu_apply_filter"]

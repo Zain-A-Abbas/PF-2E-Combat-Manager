@@ -10,8 +10,9 @@ enum SORT_MODE {
 @onready var enemy_list := $Database/DatabaseSheets/EnemyList
 @onready var enemy_sheet := $Database/DatabaseSheets/EnemySheet
 
-# The filter menus; the filtering data is retrieved directly from them
+# The filter menus; the filtering traits and numbers are retrieved directly from them
 @onready var size_filter_menu := $CenterContainer/SizeFilterMenu
+@onready var rarity_filter_menu := $CenterContainer/RarityFilterMenu
 
 
 # Holds all enemy data
@@ -60,7 +61,7 @@ func sort_filter_enemies():
 	
 	filtered_sorted_enemies = enemies
 	
-	filtered_sorted_enemies = size_filter(filtered_sorted_enemies)
+	filtered_sorted_enemies = filter_enemies(filtered_sorted_enemies)
 	
 	match sorting_mode:
 		SORT_MODE.ALPHABETICAL:
@@ -81,25 +82,63 @@ static func sort_level(enemy_a: EnemyFilterData, enemy_b: EnemyFilterData):
 
 func filter_enemies(enemies_to_filter: Array[EnemyFilterData]) -> Array[EnemyFilterData]:
 	var filtering := enemies_to_filter
-	filtering = size_filter(filtering)
+	filtering = general_filter(filtering, "rarity")
+	filtering = general_filter(filtering, "size")
 	return filtering
 
-func size_filter( enemies_to_filter: Array[EnemyFilterData] ) -> Array[EnemyFilterData]:
+
+# Sorts by rarity, traits and size; They share a function because of how similar they are
+func general_filter( enemies_to_filter: Array[EnemyFilterData], rarity_size_traits: String ) -> Array[EnemyFilterData]:
 	
 	
-	# Enemies to include and enemies to remove, as well as "unexcluded" enemies
+	# Enemies to include and enemies to remove
 	var include_enemies: Array[EnemyFilterData] = []
 	var remove_enemies: Array[EnemyFilterData] = []
 	
+	# Holds the filters; assigned to the size, rarity, or trait filter menus
+	var current_filter_menu
+	
+	# Assigns the container to compare for filtering
+	match rarity_size_traits:
+		"rarity":
+			current_filter_menu  = rarity_filter_menu
+		"size":
+			current_filter_menu = size_filter_menu
+		"traits":
+			current_filter_menu = size_filter_menu
+	
+	# If no filters are interacted with in the corresponding filter menu, then do not even iterate through the enemies
+	if current_filter_menu.has_no_filters():
+		return enemies_to_filter
+	
 	# Goes through every enemy, stacks them up to the filter
 	for enemy in enemies_to_filter:
-		for filter_button in size_filter_menu.filter_container:
-			if enemy.size.to_lower() == filter_button.trait_name.to_lower():
-				if filter_button.filter_state == FilterButton.FilterState.INCLUDE:
-					include_enemies.append(enemy)
-				elif filter_button.filter_state == FilterButton.FilterState.EXCLUDE:
-					remove_enemies.append(enemy)
+		for filter_button in current_filter_menu.filter_container:
+			
+			# The value that is being compared between the enemy filter data and the filter node
+			var comparison_value: Variant
+			
+			# Assigns the variable to compare for filtering
+			match rarity_size_traits:
+				"rarity":
+					comparison_value  = enemy.rarity
+				"size":
+					comparison_value = enemy.size
+				"traits":
+					comparison_value = enemy.traits
+			
+			
+			if rarity_size_traits == "traits":
+				pass
+			else: 
+				# Lowercases what is compared so no case disrepancies occur
+				if comparison_value.to_lower() == filter_button.trait_name.to_lower():
+					if filter_button.filter_state == FilterButton.FilterState.INCLUDE:
+						include_enemies.append(enemy)
+					elif filter_button.filter_state == FilterButton.FilterState.EXCLUDE:
+						remove_enemies.append(enemy)
 	
+	# If there are any enemies ticked to include at all, just return all the ones who are not set to be excluded
 	if !include_enemies.is_empty():
 		var final_enemies: Array[EnemyFilterData] = []
 		for enemy in include_enemies:
@@ -107,6 +146,7 @@ func size_filter( enemies_to_filter: Array[EnemyFilterData] ) -> Array[EnemyFilt
 				final_enemies.append(enemy)
 		return final_enemies
 	
+	# If no enemies are set to include, then just add every enemy not excluded
 	if !remove_enemies.is_empty():
 		var final_enemies: Array[EnemyFilterData] = []
 		for enemy in enemies_to_filter:
@@ -136,13 +176,20 @@ func _on_button_2_pressed():
 
 ## Filter buttons
 
-func _on_size_filter_button_button_pressed():
-	if !size_filter_menu.visible:
-		size_filter_menu.visible = true
-	else:
-		size_filter_menu.visible = false
+func _on_size_filter_button_pressed():
+	size_filter_menu.visible = !size_filter_menu.visible
 
 func _on_size_filter_menu_apply_filter():
 	size_filter_menu.visible = false
-	$Database/MarginContainer/SortingFiltering/SizeFilterButton.button_pushed()
+	#$Database/MarginContainer/SortingFiltering/SizeFilterButton.button_pushed()
+	sort_filter_enemies()
+
+
+func _on_rarity_filter_button_pressed():
+	rarity_filter_menu.visible = !rarity_filter_menu.visible
+
+
+func _on_rarity_filter_menu_apply_filter():
+	rarity_filter_menu.visible = false
+	#$Database/MarginContainer/SortingFiltering/RarityFilterButton.button_pushed()
 	sort_filter_enemies()

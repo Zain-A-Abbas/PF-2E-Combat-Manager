@@ -40,11 +40,11 @@ func trait_interpreter(val) -> String:
 	match val:
 		"tiny":
 			return "TINY"
-		"sm":
+		"sm", "sml":
 			return "SMALL"
 		"med":
 			return "MEDIUM"
-		"lg":
+		"lg", "lrg":
 			return "LARGE"
 		"huge":
 			return "HUGE"
