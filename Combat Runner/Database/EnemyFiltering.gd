@@ -1,4 +1,5 @@
 extends PanelContainer
+class_name FilteringMenu
 
 @export var filter_type: String
 var filter_container: Array[Node]

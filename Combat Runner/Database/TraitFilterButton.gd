@@ -1,5 +1,6 @@
 @tool
 extends FilterButton
+class_name TraitFilterButton
 
 const regular_trait = preload("res://Themes/TraitStyleboxes/RegularTrait.tres")
 const uncommon_trait = preload("res://Themes/TraitStyleboxes/UncommonTrait.tres")

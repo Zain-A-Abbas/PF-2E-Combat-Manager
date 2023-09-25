@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cs40bi6fh3qd6"]
+
+[ext_resource type="Script" path="res://Debug/TraitExtractor.gd" id="1_e3b0h"]
+
+[node name="TraitExtractor" type="Node"]
+script = ExtResource("1_e3b0h")

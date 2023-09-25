@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bmbtqllw2ypjc"]
+[gd_scene load_steps=9 format=3 uid="uid://bmbtqllw2ypjc"]
 
 [ext_resource type="PackedScene" uid="uid://kg3x603pe2ss" path="res://EnemySheet.tscn" id="1_bdhe6"]
 [ext_resource type="Script" path="res://Database/EnemyDatabase.gd" id="1_oki1l"]
@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://be3xj0wqsh8kv" path="res://Themes/FilterWindow.tres" id="5_ofgan"]
 [ext_resource type="PackedScene" uid="uid://bg2q2nt5lb8xs" path="res://Database/RarityFiltering.tscn" id="7_p2jkh"]
 [ext_resource type="PackedScene" uid="uid://bvo7dlcc42sjo" path="res://Database/SizeFiltering.tscn" id="7_r2utg"]
+[ext_resource type="PackedScene" uid="uid://vxjcml8k865s" path="res://Database/TraitFiltering.tscn" id="8_003v4"]
 
 [node name="EnemyDatabase" type="Control"]
 layout_mode = 3
@@ -106,6 +107,7 @@ text = "Traits"
 [node name="ResetButton2" type="Button" parent="Database/MarginContainer/SortingFiltering"]
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 4
 theme = ExtResource("5_ofgan")
 text = "Reset selection"
 
@@ -140,10 +142,16 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="TraitFilterMenu" parent="CenterContainer" instance=ExtResource("8_003v4")]
+visible = false
+layout_mode = 2
+
 [connection signal="pressed" from="Database/MarginContainer/SortingFiltering/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Database/MarginContainer/SortingFiltering/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Database/MarginContainer/SortingFiltering/RarityFilterButton" to="." method="_on_rarity_filter_button_pressed"]
 [connection signal="pressed" from="Database/MarginContainer/SortingFiltering/SizeFilterButton" to="." method="_on_size_filter_button_pressed"]
+[connection signal="pressed" from="Database/MarginContainer/SortingFiltering/TraitsFilterButton" to="." method="_on_traits_filter_button_pressed"]
 [connection signal="item_selected" from="Database/DatabaseSheets/EnemyList" to="." method="_on_enemy_list_item_selected"]
 [connection signal="apply_filter" from="CenterContainer/SizeFilterMenu" to="." method="_on_size_filter_menu_apply_filter"]
 [connection signal="apply_filter" from="CenterContainer/RarityFilterMenu" to="." method="_on_rarity_filter_menu_apply_filter"]
+[connection signal="apply_filter" from="CenterContainer/TraitFilterMenu" to="." method="_on_trait_filter_menu_apply_filter"]

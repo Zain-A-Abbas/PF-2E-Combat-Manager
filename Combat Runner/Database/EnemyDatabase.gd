@@ -13,6 +13,7 @@ enum SORT_MODE {
 # The filter menus; the filtering traits and numbers are retrieved directly from them
 @onready var size_filter_menu := $CenterContainer/SizeFilterMenu
 @onready var rarity_filter_menu := $CenterContainer/RarityFilterMenu
+@onready var trait_filter_menu := $CenterContainer/TraitFilterMenu
 
 
 # Holds all enemy data
@@ -84,6 +85,7 @@ func filter_enemies(enemies_to_filter: Array[EnemyFilterData]) -> Array[EnemyFil
 	var filtering := enemies_to_filter
 	filtering = general_filter(filtering, "rarity")
 	filtering = general_filter(filtering, "size")
+	filtering = general_filter(filtering, "traits")
 	return filtering
 
 
@@ -105,7 +107,8 @@ func general_filter( enemies_to_filter: Array[EnemyFilterData], rarity_size_trai
 		"size":
 			current_filter_menu = size_filter_menu
 		"traits":
-			current_filter_menu = size_filter_menu
+			current_filter_menu = trait_filter_menu
+	
 	
 	# If no filters are interacted with in the corresponding filter menu, then do not even iterate through the enemies
 	if current_filter_menu.has_no_filters():
@@ -129,9 +132,18 @@ func general_filter( enemies_to_filter: Array[EnemyFilterData], rarity_size_trai
 			
 			
 			if rarity_size_traits == "traits":
-				pass
+				for enemy_trait in comparison_value:
+					# Lowercases what is compared so no case disrepancies occur
+					if enemy_trait.to_lower() == filter_button.trait_name.to_lower():
+						if filter_button.filter_state == FilterButton.FilterState.INCLUDE:
+							include_enemies.append(enemy)
+						elif filter_button.filter_state == FilterButton.FilterState.EXCLUDE:
+							remove_enemies.append(enemy)
+				if trait_filter_menu.include_and_or && filter_button.filter_state == FilterButton.FilterState.INCLUDE:
+					if !comparison_value.has(filter_button.trait_name.to_lower()):
+						if !remove_enemies.has(enemy):
+							remove_enemies.append(enemy)
 			else: 
-				# Lowercases what is compared so no case disrepancies occur
 				if comparison_value.to_lower() == filter_button.trait_name.to_lower():
 					if filter_button.filter_state == FilterButton.FilterState.INCLUDE:
 						include_enemies.append(enemy)
@@ -188,8 +200,15 @@ func _on_size_filter_menu_apply_filter():
 func _on_rarity_filter_button_pressed():
 	rarity_filter_menu.visible = !rarity_filter_menu.visible
 
-
 func _on_rarity_filter_menu_apply_filter():
 	rarity_filter_menu.visible = false
 	#$Database/MarginContainer/SortingFiltering/RarityFilterButton.button_pushed()
+	sort_filter_enemies()
+
+
+func _on_traits_filter_button_pressed():
+	trait_filter_menu.visible = !trait_filter_menu.visible
+
+func _on_trait_filter_menu_apply_filter():
+	trait_filter_menu.visible = false
 	sort_filter_enemies()
