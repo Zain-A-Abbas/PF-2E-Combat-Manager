@@ -13,7 +13,10 @@ func ability_parser(ability_text: String) -> String:
 	parsed_description = spell_parser(parsed_description)
 	parsed_description = save_parser(parsed_description)
 	parsed_description = recharge_parser(parsed_description)
+	parsed_description = action_parser(parsed_description)
+	parsed_description = enemy_name_parser(parsed_description)
 	parsed_description = format_parser(parsed_description)
+	parsed_description = list_parser(parsed_description)
 	return parsed_description
 
 # Removes unnecessary things such as <>'s, \ns, bestiary-ability and bestiary-effects from description
@@ -122,7 +125,7 @@ func spell_parser(description_text: String) -> String:
 # Get saves from @Check[type:X|dc:Y|Z]
 func save_parser(description_text: String) -> String:
 	var regex = RegEx.new()
-	regex.compile("@Check\\[type:(.*?)\\|dc:([0-9]+)(?:\\|(.+?))?]")
+	regex.compile("@Check\\[type:(.*?)\\|dc:([0-9]+)(?: *\\|(.+?))?]")
 	var save_strings = regex.search(description_text)
 	if regex.search(description_text) == null:
 		return description_text
@@ -142,6 +145,26 @@ func recharge_parser(description_text: String) -> String:
 		return description_text
 	return recharge_parser(regex.sub(description_text, regex.search(description_text).strings[2]))
 
+# Parses common actions such as escaping
+func action_parser(description_text: String) -> String:
+	var regex = RegEx.new()
+	regex.compile("@UUID\\[Compendium\\.pf2e\\.actionspf2e\\.Item\\.(.*?)\\]")
+	var action_strings = regex.search(description_text)
+	if regex.search(description_text) == null:
+		return description_text
+	var action_name: String = action_strings.strings[1]
+	return action_parser(regex.sub(description_text, action_name))
+
+# Parses enemy names if it refers to another enemy
+func enemy_name_parser(description_text: String) -> String:
+	var regex = RegEx.new()
+	regex.compile("@UUID\\[Compendium\\.pf2e\\.(.*?)\\.Actor\\.(.*?)\\]")
+	var enemy_strings = regex.search(description_text)
+	if regex.search(description_text) == null:
+		return description_text
+	var enemy_name: String = enemy_strings.strings[2]
+	return enemy_name_parser(regex.sub(description_text, enemy_name))
+
 # Corrects formatting such as turning <strong> to [b]
 func format_parser(description_text: String) -> String:
 	var regex = RegEx.new()
@@ -151,6 +174,45 @@ func format_parser(description_text: String) -> String:
 	var formatted_description: String = regex.sub(description_text, "[b]")
 	regex.compile("</strong>")
 	return format_parser(regex.sub(formatted_description, "[/b]"))
+
+func list_parser(description_text: String) -> String:
+	if !description_text.contains("<ul>"):
+		return description_text
+	
+	# Sets start and end point of list
+	var ul_pos: int = description_text.find("<ul>")
+		# +5 is to account for </ul> itself
+		
+	var ul_end_len: int = description_text.find("</ul>") - description_text.find("<ul>") + 5
+	var list_text: String = description_text.substr(ul_pos, ul_end_len)
+	var list_items: PackedStringArray = list_text.split("</li> <li>")
+	
+	# Messily goes through every item in the list_items array and gets rid of unneeded html syntax
+	var i: int = 0
+	for list_item in list_items:
+		if list_item.find("<ul> <li>") != -1:
+			list_item = list_item.erase(list_item.find("<ul> <li>"), 9)
+		if list_item.find("<ul><li>") != -1:
+			list_item = list_item.erase(list_item.find("<ul><li>"), 8)
+		if list_item.find("</li> </ul>") != -1:
+			list_item = list_item.erase(list_item.find("</li> </ul>"), 11)
+		if list_item.find("</li></ul>") != -1:
+			list_item = list_item.erase(list_item.find("</li></ul>"), 10)
+		list_items[i] = list_item
+		i += 1
+	
+	# Finally edits the list into new_description and returns that
+	var new_description: String = description_text
+	var formatted_list: String = "\n [ul]"
+	for list_item in list_items:
+		formatted_list += list_item + "\n"
+	formatted_list += "[/ul]\n "
+	
+	new_description = new_description.erase(ul_pos, ul_end_len)
+	new_description = new_description.insert(ul_pos, formatted_list)
+	
+	
+	return list_parser(new_description)
 
 # Parsing trait names
 

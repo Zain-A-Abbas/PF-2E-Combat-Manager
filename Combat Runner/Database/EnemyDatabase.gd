@@ -8,13 +8,15 @@ enum SORT_MODE {
 }
 
 @onready var enemy_list := $Database/DatabaseSheets/EnemyList
-@onready var enemy_sheet := $Database/DatabaseSheets/EnemySheet
+@onready var enemy_sheet := $Database/DatabaseSheets/VBoxContainer/EnemySheet
 
 # The filter menus; the filtering traits and numbers are retrieved directly from them
 @onready var size_filter_menu := $CenterContainer/SizeFilterMenu
 @onready var rarity_filter_menu := $CenterContainer/RarityFilterMenu
 @onready var trait_filter_menu := $CenterContainer/TraitFilterMenu
+@onready var search_bar := $Database/MarginContainer/SortingFiltering/SearchBar
 
+signal add_enemy(enemy_data)
 
 # Holds all enemy data
 var enemies: Array[EnemyFilterData]
@@ -64,6 +66,8 @@ func sort_filter_enemies():
 	
 	filtered_sorted_enemies = filter_enemies(filtered_sorted_enemies)
 	
+	
+	
 	match sorting_mode:
 		SORT_MODE.ALPHABETICAL:
 			filtered_sorted_enemies.sort_custom(sort_alphabetic)
@@ -83,11 +87,25 @@ static func sort_level(enemy_a: EnemyFilterData, enemy_b: EnemyFilterData):
 
 func filter_enemies(enemies_to_filter: Array[EnemyFilterData]) -> Array[EnemyFilterData]:
 	var filtering := enemies_to_filter
+	filtering = name_filter(filtering, search_bar.text)
 	filtering = general_filter(filtering, "rarity")
 	filtering = general_filter(filtering, "size")
 	filtering = general_filter(filtering, "traits")
 	return filtering
 
+func name_filter( enemies_to_filter: Array[EnemyFilterData], search_name: String ) -> Array[EnemyFilterData]:
+	
+	if search_name == "":
+		return enemies_to_filter
+	
+	# Enemies to include
+	var include_enemies: Array[EnemyFilterData] = []
+	
+	for enemy in enemies_to_filter:
+		if enemy.creature_name.to_lower().contains(search_name.to_lower()):
+			include_enemies.append(enemy)
+	
+	return include_enemies
 
 # Sorts by rarity, traits and size; They share a function because of how similar they are
 func general_filter( enemies_to_filter: Array[EnemyFilterData], rarity_size_traits: String ) -> Array[EnemyFilterData]:
@@ -212,3 +230,12 @@ func _on_traits_filter_button_pressed():
 func _on_trait_filter_menu_apply_filter():
 	trait_filter_menu.visible = false
 	sort_filter_enemies()
+
+
+
+func _on_search_bar_text_changed(new_text):
+	sort_filter_enemies()
+
+
+func _on_add_to_combat_button_pressed():
+	emit_signal("add_enemy", enemy_sheet.enemy_data)

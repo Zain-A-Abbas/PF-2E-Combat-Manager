@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://bekrgofys7uc7"]
+[gd_scene load_steps=14 format=3 uid="uid://bekrgofys7uc7"]
 
+[ext_resource type="Theme" uid="uid://bdi2c7b3hyktq" path="res://Themes/Combat.tres" id="1_42cmn"]
 [ext_resource type="Script" path="res://Combat/DiceResults.gd" id="1_m0fvx"]
 [ext_resource type="Theme" uid="uid://bucbvtpc225di" path="res://Themes/Theme1.tres" id="1_mi777"]
+[ext_resource type="Script" path="res://Combat/Combat.gd" id="2_gvh2h"]
 [ext_resource type="PackedScene" uid="uid://bmuq4plht6pkj" path="res://Combat/DiceButton.tscn" id="2_wbg3i"]
 [ext_resource type="PackedScene" uid="uid://kg3x603pe2ss" path="res://EnemySheet.tscn" id="4_o0xil"]
 
@@ -21,6 +23,8 @@ bg_color = Color(0, 0.145098, 0.392157, 1)
 /styles/BGStylebox = SubResource("StyleBoxFlat_pwvle")
 /styles/l = SubResource("StyleBoxTexture_e6s5d")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2d1k3"]
+
 [sub_resource type="Theme" id="Theme_cxjl0"]
 
 [node name="Combat" type="Control"]
@@ -30,6 +34,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_42cmn")
+script = ExtResource("2_gvh2h")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -44,7 +50,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 15.0
 theme = SubResource("Theme_ch1wy")
-color = Color(0, 0.145098, 0.392157, 1)
 
 [node name="InitiativeRolling" type="VBoxContainer" parent="HBoxContainer/Panel"]
 layout_mode = 1
@@ -61,6 +66,37 @@ theme = SubResource("Theme_i6n4j")
 layout_mode = 2
 size_flags_vertical = 3
 
+[node name="Panel" type="PanelContainer" parent="HBoxContainer/Panel/InitiativeRolling/Initiative"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2d1k3")
+
+[node name="Label" type="Label" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/Panel"]
+layout_mode = 2
+text = "Initiative"
+
+[node name="InitiativeMargins" type="MarginContainer" parent="HBoxContainer/Panel/InitiativeRolling/Initiative"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+
+[node name="InitiativeContainer" type="VBoxContainer" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins"]
+layout_mode = 2
+
+[node name="InitiativeOptions" type="HBoxContainer" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins"]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="RerollInitiativeButton" type="Button" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/InitiativeOptions"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Re-roll Initiative"
+
+[node name="CopyInitiativeButton" type="Button" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/InitiativeOptions"]
+layout_mode = 2
+text = "Copy"
+
 [node name="Rolling" type="VBoxContainer" parent="HBoxContainer/Panel/InitiativeRolling"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -73,8 +109,9 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 0.08
 theme = SubResource("Theme_cxjl0")
 color = Color(0.694118, 0.694118, 0.694118, 1)
+metadata/_edit_group_ = true
 
-[node name="Label" type="Label" parent="HBoxContainer/Panel/InitiativeRolling/Rolling/TextHeader"]
+[node name="DieRollerLabel" type="Label" parent="HBoxContainer/Panel/InitiativeRolling/Rolling/TextHeader"]
 texture_filter = 1
 layout_mode = 0
 offset_right = 40.0
@@ -158,19 +195,74 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 85.0
 
-[node name="EnemyTracker" type="TabContainer" parent="HBoxContainer/TrackerSheetSplit"]
+[node name="EncounterTracker" type="TabContainer" parent="HBoxContainer/TrackerSheetSplit"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 45.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EnemyTracker"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker"]
 layout_mode = 2
 
-[node name="EnemyTracker" type="VBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EnemyTracker/VBoxContainer"]
+[node name="BlankEnemyButton" type="Button" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer"]
+layout_mode = 2
+text = "+Blank"
+
+[node name="EnemyTrackerPanel" type="PanelContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Enemies" type="VBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EnemyTrackerPanel"]
 layout_mode = 2
 
-[node name="EXPTotal" type="HBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EnemyTracker/VBoxContainer"]
+[node name="EXPTotal" type="PanelContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal"]
+layout_mode = 2
+color = Color(0, 0.145098, 0.392157, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal/MarginContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Clear"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="LevelSpinbox" type="SpinBox" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+
+[node name="PartyLevelLabel" type="Label" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 1
+text = "Party Level"
+vertical_alignment = 1
+
+[node name="PlayerCountSpinbox" type="SpinBox" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="PartyCountLabel" type="Label" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 1
+text = "Player Count"
+vertical_alignment = 1
 
 [node name="SheetandDatabase" type="VBoxContainer" parent="HBoxContainer/TrackerSheetSplit"]
 layout_mode = 2
@@ -184,4 +276,7 @@ size_flags_vertical = 3
 [node name="EnemySheet" parent="HBoxContainer/TrackerSheetSplit/SheetandDatabase/VSplitContainer" instance=ExtResource("4_o0xil")]
 layout_mode = 2
 
+[connection signal="pressed" from="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/InitiativeOptions/RerollInitiativeButton" to="." method="_on_reroll_initiative_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/InitiativeOptions/CopyInitiativeButton" to="." method="_on_copy_initiative_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel/InitiativeRolling/Rolling/DiceButtons/ClearDice" to="HBoxContainer/Panel/InitiativeRolling/Rolling/ResultsBg/Results" method="_on_clear_dice_pressed"]
+[connection signal="pressed" from="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/BlankEnemyButton" to="." method="_on_blank_enemy_button_pressed"]

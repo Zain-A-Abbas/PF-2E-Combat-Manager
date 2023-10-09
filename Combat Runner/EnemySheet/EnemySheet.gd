@@ -6,7 +6,7 @@ const SHEET_CONTENT := preload("res://EnemySheet/SheetContent.tscn")
 const ONE_ACTION := "◆"
 const TWO_ACTIVITY := "◆◆"
 const THREE_ACTIVITY := "◆◆◆"
-const REACTION := "⤾"
+const REACTION := "⮎"
 const FREE_ACTION := "◇"
 
 # A lot of these are their own variable just for faster referencing
@@ -29,7 +29,7 @@ var enemy_attributes
 @onready var attacks := $"SheetData/SheetScroller/SheetInfo/SheetMargin/Data/Speed&OffensiveAbilities"
 
 
-func setup(enemy_file):
+func setup(enemy_file, conditions = {}):
 	# Gets the enemy sheet data
 	enemy_data = enemy_file
 	
@@ -533,7 +533,7 @@ func setup_spells():
 			
 			# Adds uses if a spell has multiple
 			if spell["system"]["location"].has("uses"):
-				spell_level_text += " [b](" + str(spell["system"]["location"]["uses"]["max"]) + "x)[/b]"
+				spell_level_text += " [b](" + str(spell["system"]["location"]["uses"]["value"]) + "x)[/b]"
 			
 			spell_level_text += ", "
 		# Makes the last spell end with "; " instead of ", "

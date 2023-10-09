@@ -55,6 +55,11 @@ layout_mode = 2
 theme = ExtResource("5_ofgan")
 placeholder_text = "Search by Name"
 
+[node name="SearchButton" type="Button" parent="Database/MarginContainer/SortingFiltering"]
+layout_mode = 2
+theme = ExtResource("5_ofgan")
+text = "Search"
+
 [node name="SortBy" type="Label" parent="Database/MarginContainer/SortingFiltering"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -125,24 +130,10 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Database/DatabaseSheets"]
+[node name="EnemySheet" parent="Database/DatabaseSheets" instance=ExtResource("1_bdhe6")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 5.0
-
-[node name="EnemySheet" parent="Database/DatabaseSheets/VBoxContainer" instance=ExtResource("1_bdhe6")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="Database/DatabaseSheets/VBoxContainer"]
-custom_minimum_size = Vector2(0, 40)
-layout_mode = 2
-
-[node name="AddToCombatButton" type="Button" parent="Database/DatabaseSheets/VBoxContainer/PanelContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "Add to Combat"
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -166,14 +157,13 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[connection signal="text_changed" from="Database/MarginContainer/SortingFiltering/SearchBar" to="." method="_on_search_bar_text_changed"]
+[connection signal="pressed" from="Database/MarginContainer/SortingFiltering/SearchButton" to="." method="_on_search_button_pressed"]
 [connection signal="pressed" from="Database/MarginContainer/SortingFiltering/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Database/MarginContainer/SortingFiltering/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="Database/MarginContainer/SortingFiltering/RarityFilterButton" to="." method="_on_rarity_filter_button_pressed"]
 [connection signal="pressed" from="Database/MarginContainer/SortingFiltering/SizeFilterButton" to="." method="_on_size_filter_button_pressed"]
 [connection signal="pressed" from="Database/MarginContainer/SortingFiltering/TraitsFilterButton" to="." method="_on_traits_filter_button_pressed"]
 [connection signal="item_selected" from="Database/DatabaseSheets/EnemyList" to="." method="_on_enemy_list_item_selected"]
-[connection signal="pressed" from="Database/DatabaseSheets/VBoxContainer/PanelContainer/AddToCombatButton" to="." method="_on_add_to_combat_button_pressed"]
 [connection signal="apply_filter" from="CenterContainer/SizeFilterMenu" to="." method="_on_size_filter_menu_apply_filter"]
 [connection signal="apply_filter" from="CenterContainer/RarityFilterMenu" to="." method="_on_rarity_filter_menu_apply_filter"]
 [connection signal="apply_filter" from="CenterContainer/TraitFilterMenu" to="." method="_on_trait_filter_menu_apply_filter"]
