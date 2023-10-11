@@ -9,17 +9,16 @@ var enemy_node: Node
 var initiative: int = 0
 
 # Adds the enemy name and rolls its initiative
-func setup_initiative(enemy_sheet):
+func setup_initiative(enemy):
 	initiative = randi_range(1, 20)
 	
-	enemy_data = enemy_sheet
+	enemy_data = enemy.enemy_data
+	enemy_name.text = enemy.enemy_name
 	
 	if enemy_data == null:
-		enemy_name.text = "Blank"
 		initiative_count.text = str(initiative)
 		return
 	
-	enemy_name.text = enemy_data["name"]
 	initiative += enemy_data["system"]["attributes"]["perception"]["value"]
 	initiative_count.text = str(initiative)
 

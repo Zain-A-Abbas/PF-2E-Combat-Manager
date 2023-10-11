@@ -4,10 +4,12 @@
 [ext_resource type="Script" path="res://EnemySheet/SheetContentsText.gd" id="2_le7wy"]
 
 [node name="Content" type="RichTextLabel"]
+focus_mode = 2
 theme = ExtResource("1_dtlcl")
 bbcode_enabled = true
 text = "[b]Perception[/b] +1;"
 fit_content = true
+selection_enabled = true
 script = ExtResource("2_le7wy")
 info_type = 1
 metadata/_edit_lock_ = true

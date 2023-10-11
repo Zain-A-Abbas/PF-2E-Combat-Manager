@@ -1,4 +1,5 @@
 extends PanelContainer
+class_name EnemyInfoTemplate
 
 @onready var name_bar:= $HBoxContainer/Control/MarginContainer/HPBarControl/EnemyName
 @onready var hp_bar := $HBoxContainer/Control/MarginContainer/HPBarControl/HPBar
@@ -26,22 +27,17 @@ var enemy_data = null
 # The enemy's name
 var enemy_name: String
 
+# Any conditions or stat changes affecting the enemy
+var conditions = {}
+
 func _ready():
 	regex.compile("^[0 -9]*$")
 
-func setup_enemy(enemy_sheet_data):
-	# Makes it a blank enemy if no directory is given
-	if enemy_sheet_data == null:
-		enemy_name = ""
-		max_hp = 100
-		hp = 100
-		return
-	
-	enemy_data = enemy_sheet_data
-	# Access the name and hp values from the sheet
-	enemy_name = enemy_data["name"]
-	max_hp = enemy_data["system"]["attributes"]["hp"]["max"]
-	hp = max_hp
+func setup_enemy(encounter_enemy: EnemyEncounterData):
+	hp = encounter_enemy.hp
+	max_hp = encounter_enemy.max_hp
+	enemy_name = encounter_enemy.enemy_name
+	enemy_data = encounter_enemy.enemy_data
 	name_bar.text = enemy_name
 
 func _gui_input(event):

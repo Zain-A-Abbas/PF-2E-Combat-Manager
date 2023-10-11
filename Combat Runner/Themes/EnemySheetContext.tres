@@ -1,8 +1,14 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://byxv6hajwxsqf"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://byxv6hajwxsqf"]
 
 [ext_resource type="FontFile" uid="uid://deqhew2apixpi" path="res://Fonts/GOTHICB.TTF" id="1_rhxcp"]
 [ext_resource type="FontFile" uid="uid://cmu018bnfju8p" path="res://Fonts/GOTHICI.TTF" id="2_d1cfy"]
 [ext_resource type="FontFile" uid="uid://ddoaaon50emb5" path="res://Fonts/GOTHIC.TTF" id="3_fq5lc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q7rmd"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
 
 [resource]
 Label/colors/font_color = Color(0, 0, 0, 1)
@@ -15,3 +21,4 @@ RichTextLabel/font_sizes/normal_font_size = 20
 RichTextLabel/fonts/bold_font = ExtResource("1_rhxcp")
 RichTextLabel/fonts/italics_font = ExtResource("2_d1cfy")
 RichTextLabel/fonts/normal_font = ExtResource("3_fq5lc")
+RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_q7rmd")

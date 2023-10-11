@@ -81,19 +81,27 @@ theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 
-[node name="InitiativeContainer" type="VBoxContainer" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins"]
 layout_mode = 2
 
-[node name="InitiativeOptions" type="HBoxContainer" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 10
+size_flags_vertical = 3
 
-[node name="RerollInitiativeButton" type="Button" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/InitiativeOptions"]
+[node name="InitiativeContainer" type="VBoxContainer" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="InitiativeOptions" type="HBoxContainer" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/VBoxContainer"]
+layout_mode = 2
+
+[node name="RerollInitiativeButton" type="Button" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/VBoxContainer/InitiativeOptions"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Re-roll Initiative"
 
-[node name="CopyInitiativeButton" type="Button" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/InitiativeOptions"]
+[node name="CopyInitiativeButton" type="Button" parent="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/VBoxContainer/InitiativeOptions"]
 layout_mode = 2
 text = "Copy"
 
@@ -199,65 +207,70 @@ size_flags_stretch_ratio = 85.0
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 45.0
+drag_to_rearrange_enabled = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker"]
+[node name="Encounter A" type="VBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker"]
 layout_mode = 2
 
-[node name="BlankEnemyButton" type="Button" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer"]
+[node name="BlankEnemyButton" type="Button" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A"]
 layout_mode = 2
 text = "+Blank"
 
-[node name="EnemyTrackerPanel" type="PanelContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer"]
+[node name="EnemyTrackerPanel" type="PanelContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Enemies" type="VBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EnemyTrackerPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/EnemyTrackerPanel"]
 layout_mode = 2
 
-[node name="EXPTotal" type="PanelContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer"]
+[node name="Enemies" type="VBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/EnemyTrackerPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EXPTotal" type="PanelContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="ColorRect" type="ColorRect" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal"]
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/EXPTotal"]
 layout_mode = 2
 color = Color(0, 0.145098, 0.392157, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/EXPTotal"]
 layout_mode = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/EXPTotal/MarginContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="Button" type="Button" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal/MarginContainer/HBoxContainer"]
+[node name="Button" type="Button" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/EXPTotal/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Clear"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal/MarginContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/EXPTotal/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="LevelSpinbox" type="SpinBox" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+[node name="LevelSpinbox" type="SpinBox" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
 layout_direction = 2
 layout_mode = 2
 
-[node name="PartyLevelLabel" type="Label" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+[node name="PartyLevelLabel" type="Label" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
 layout_direction = 2
 layout_mode = 2
 size_flags_vertical = 1
 text = "Party Level"
 vertical_alignment = 1
 
-[node name="PlayerCountSpinbox" type="SpinBox" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+[node name="PlayerCountSpinbox" type="SpinBox" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="PartyCountLabel" type="Label" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+[node name="PartyCountLabel" type="Label" parent="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
 layout_direction = 2
 layout_mode = 2
 size_flags_vertical = 1
@@ -276,7 +289,8 @@ size_flags_vertical = 3
 [node name="EnemySheet" parent="HBoxContainer/TrackerSheetSplit/SheetandDatabase/VSplitContainer" instance=ExtResource("4_o0xil")]
 layout_mode = 2
 
-[connection signal="pressed" from="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/InitiativeOptions/RerollInitiativeButton" to="." method="_on_reroll_initiative_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/InitiativeOptions/CopyInitiativeButton" to="." method="_on_copy_initiative_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/VBoxContainer/InitiativeOptions/RerollInitiativeButton" to="." method="_on_reroll_initiative_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/VBoxContainer/InitiativeOptions/CopyInitiativeButton" to="." method="_on_copy_initiative_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel/InitiativeRolling/Rolling/DiceButtons/ClearDice" to="HBoxContainer/Panel/InitiativeRolling/Rolling/ResultsBg/Results" method="_on_clear_dice_pressed"]
-[connection signal="pressed" from="HBoxContainer/TrackerSheetSplit/EncounterTracker/VBoxContainer/BlankEnemyButton" to="." method="_on_blank_enemy_button_pressed"]
+[connection signal="tab_changed" from="HBoxContainer/TrackerSheetSplit/EncounterTracker" to="." method="_on_encounter_tracker_tab_changed"]
+[connection signal="pressed" from="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/BlankEnemyButton" to="." method="_on_blank_enemy_button_pressed"]

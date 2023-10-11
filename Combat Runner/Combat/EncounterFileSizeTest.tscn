@@ -1,0 +1,268 @@
+[gd_scene load_steps=2 format=3 uid="uid://bojromp2nxucm"]
+
+[ext_resource type="PackedScene" uid="uid://dp0drwiihwcev" path="res://Combat/EnemyInfoTemplate.tscn" id="1_umrgq"]
+
+[node name="EncounterTracker" type="TabContainer"]
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 45.0
+
+[node name="Encounter A" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="BlankEnemyButton" type="Button" parent="Encounter A"]
+layout_mode = 2
+text = "+Blank"
+
+[node name="EnemyTrackerPanel" type="PanelContainer" parent="Encounter A"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Encounter A/EnemyTrackerPanel"]
+layout_mode = 2
+
+[node name="Enemies" type="VBoxContainer" parent="Encounter A/EnemyTrackerPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EnemyTracker" parent="Encounter A/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker2" parent="Encounter A/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker3" parent="Encounter A/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker4" parent="Encounter A/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker5" parent="Encounter A/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker6" parent="Encounter A/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EXPTotal" type="PanelContainer" parent="Encounter A"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ColorRect" type="ColorRect" parent="Encounter A/EXPTotal"]
+layout_mode = 2
+color = Color(0, 0.145098, 0.392157, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Encounter A/EXPTotal"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Encounter A/EXPTotal/MarginContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Encounter A/EXPTotal/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Clear"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Encounter A/EXPTotal/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="LevelSpinbox" type="SpinBox" parent="Encounter A/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+
+[node name="PartyLevelLabel" type="Label" parent="Encounter A/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 1
+text = "Party Level"
+vertical_alignment = 1
+
+[node name="PlayerCountSpinbox" type="SpinBox" parent="Encounter A/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="PartyCountLabel" type="Label" parent="Encounter A/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 1
+text = "Player Count"
+vertical_alignment = 1
+
+[node name="Encounter A2" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="BlankEnemyButton" type="Button" parent="Encounter A2"]
+layout_mode = 2
+text = "+Blank"
+
+[node name="EnemyTrackerPanel" type="PanelContainer" parent="Encounter A2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Encounter A2/EnemyTrackerPanel"]
+layout_mode = 2
+
+[node name="Enemies" type="VBoxContainer" parent="Encounter A2/EnemyTrackerPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EnemyTracker" parent="Encounter A2/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker2" parent="Encounter A2/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker3" parent="Encounter A2/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker4" parent="Encounter A2/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker5" parent="Encounter A2/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker6" parent="Encounter A2/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EXPTotal" type="PanelContainer" parent="Encounter A2"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ColorRect" type="ColorRect" parent="Encounter A2/EXPTotal"]
+layout_mode = 2
+color = Color(0, 0.145098, 0.392157, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Encounter A2/EXPTotal"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Encounter A2/EXPTotal/MarginContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Encounter A2/EXPTotal/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Clear"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Encounter A2/EXPTotal/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="LevelSpinbox" type="SpinBox" parent="Encounter A2/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+
+[node name="PartyLevelLabel" type="Label" parent="Encounter A2/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 1
+text = "Party Level"
+vertical_alignment = 1
+
+[node name="PlayerCountSpinbox" type="SpinBox" parent="Encounter A2/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="PartyCountLabel" type="Label" parent="Encounter A2/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 1
+text = "Player Count"
+vertical_alignment = 1
+
+[node name="Encounter A3" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="BlankEnemyButton" type="Button" parent="Encounter A3"]
+layout_mode = 2
+text = "+Blank"
+
+[node name="EnemyTrackerPanel" type="PanelContainer" parent="Encounter A3"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Encounter A3/EnemyTrackerPanel"]
+layout_mode = 2
+
+[node name="Enemies" type="VBoxContainer" parent="Encounter A3/EnemyTrackerPanel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EnemyTracker" parent="Encounter A3/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker2" parent="Encounter A3/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker3" parent="Encounter A3/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker4" parent="Encounter A3/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker5" parent="Encounter A3/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EnemyTracker6" parent="Encounter A3/EnemyTrackerPanel/ScrollContainer/Enemies" instance=ExtResource("1_umrgq")]
+layout_mode = 2
+
+[node name="EXPTotal" type="PanelContainer" parent="Encounter A3"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="ColorRect" type="ColorRect" parent="Encounter A3/EXPTotal"]
+layout_mode = 2
+color = Color(0, 0.145098, 0.392157, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Encounter A3/EXPTotal"]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Encounter A3/EXPTotal/MarginContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Encounter A3/EXPTotal/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Clear"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Encounter A3/EXPTotal/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="LevelSpinbox" type="SpinBox" parent="Encounter A3/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+
+[node name="PartyLevelLabel" type="Label" parent="Encounter A3/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 1
+text = "Party Level"
+vertical_alignment = 1
+
+[node name="PlayerCountSpinbox" type="SpinBox" parent="Encounter A3/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="PartyCountLabel" type="Label" parent="Encounter A3/EXPTotal/MarginContainer/HBoxContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 1
+text = "Player Count"
+vertical_alignment = 1
