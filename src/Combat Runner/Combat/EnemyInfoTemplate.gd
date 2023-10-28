@@ -40,6 +40,18 @@ func setup_enemy(encounter_enemy: EnemyEncounterData):
 	enemy_data = encounter_enemy.enemy_data
 	name_bar.text = enemy_name
 
+# Creates a combat file for the sake of creating save files
+func create_combat_file():
+	var combat_data = {
+		"enemy_name": enemy_name,
+		"hp": hp,
+		"max_hp": max_hp,
+		"conditions": conditions,
+		"enemy_data": enemy_data
+	}
+	
+	return combat_data
+
 func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == 1:

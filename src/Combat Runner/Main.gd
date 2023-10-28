@@ -10,3 +10,9 @@ func _ready():
 
 func add_enemy_to_combat(enemy_data):
 	combat.add_enemy_from_sheet(enemy_data)
+
+func _unhandled_input(event):
+	if event.is_action_pressed("save"):
+		combat.save_encounter()
+	if event.is_action_pressed("open"):
+		combat.open_encounter()

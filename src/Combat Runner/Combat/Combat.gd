@@ -2,7 +2,7 @@ extends Control
 
 const ENEMY_INFO_TEMPLATE = preload("res://Combat/EnemyInfoTemplate.tscn")
 const ENEMY_INITIATIVE = preload("res://Combat/EnemyInitiative.tscn")
-@onready var enemies
+@onready var enemies: Node
 @onready var enemy_sheet = $HBoxContainer/TrackerSheetSplit/SheetandDatabase/VSplitContainer/EnemySheet
 @onready var initiative_container = $HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/VBoxContainer/ScrollContainer/InitiativeContainer
 
@@ -88,6 +88,46 @@ func remove_enemy(enemy: Node):
 			child.queue_free()
 	enemy.queue_free()
 
+# Saving and loading
+
+func save_encounter():
+	if enemies.get_child_count() == 0:
+		return
+	
+	var save_file_location = "user://combat_driver.test.json"
+	var save_data := EncounterFile.new()
+	var file_save = FileAccess.open(save_file_location, FileAccess.WRITE)
+	
+	var i: int = 0
+	for child in enemies.get_children():
+		var enemy_combat_data = child.create_combat_file()
+		var enemy_dict_entry: String = "enemy" + str(i)
+		save_data.enemies[enemy_dict_entry] = enemy_combat_data
+		i += 1
+	
+	file_save.store_var(save_data.enemies)
+	file_save.close()
+
+# Loads an encounter file
+func open_encounter():
+	
+	# Prompts the user for where the file is, then opens and reads the file
+	var load_file_location = "user://combat_driver.test.json"
+	var load_file := FileAccess.open(load_file_location, FileAccess.READ)
+	var encounter_data = load_file.get_var(true)
+	
+	# For each enemy, create new encounter data and an info template, add the info template to enemies
+		# then fill the info template with info and pass it to the initiative
+	for enemy in encounter_data.values():
+		var new_encounter_data = EnemyEncounterData.new()
+		var loaded_enemy = ENEMY_INFO_TEMPLATE.instantiate()
+		enemies.add_child(loaded_enemy)
+		loaded_enemy.setup_enemy(new_encounter_data.initialize_from_save_data(enemy))
+		loaded_enemy.viewing_enemy.connect(view_enemy_sheet)
+		add_enemy_to_initiative(loaded_enemy)
+	
+
+## SIGNALS
 
 func _on_reroll_initiative_button_pressed():
 	if initiative_container.get_child_count() == 0:

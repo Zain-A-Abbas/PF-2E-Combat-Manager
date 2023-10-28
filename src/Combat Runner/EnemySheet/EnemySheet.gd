@@ -456,15 +456,10 @@ func setup_attacks():
 
 func setup_spells():
 	var has_spells: bool = false
-	var spell_tradition_name: String = ""
-	var dc: int = 0
-	var attack_roll: int = 0
 	
 	# Holds every individual casting entry an enemy may have
 	var spellcasting_entries = []
 	
-	# Whether or not the spells are focus spells
-	var is_focus: bool = false
 	
 	# Verify that the enemy has spells
 	for ability in enemy_abilities:
