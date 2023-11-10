@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctnbn8p0lvusg"]
+
+[ext_resource type="Script" path="res://LoadDialog.gd" id="1_chn7h"]
+
+[node name="LoadDialog" type="FileDialog"]
+title = "Open a File"
+initial_position = 1
+size = Vector2i(1000, 600)
+min_size = Vector2i(1000, 600)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.json")
+script = ExtResource("1_chn7h")
+
+[connection signal="confirmed" from="." to="." method="_on_confirmed"]

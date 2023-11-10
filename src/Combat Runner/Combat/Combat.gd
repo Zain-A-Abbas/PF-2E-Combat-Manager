@@ -8,6 +8,8 @@ const ENEMY_INITIATIVE = preload("res://Combat/EnemyInitiative.tscn")
 
 func _ready():
 	enemies = $"HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/EnemyTrackerPanel/ScrollContainer/Enemies"
+	EventBus.encounter_save_directory_chosen.connect(save_validated)
+	EventBus.encounter_load_directory_chosen.connect(load_validated)
 
 # Adding an enemy from a pre-existing sheet
 func add_enemy_from_sheet(enemy_data):
@@ -93,8 +95,10 @@ func remove_enemy(enemy: Node):
 func save_encounter():
 	if enemies.get_child_count() == 0:
 		return
-	
-	var save_file_location = "user://combat_driver.test.json"
+	SaveDialog.choose_save_directory()
+
+func save_validated():
+	var save_file_location = SaveDialog.current_path
 	var save_data := EncounterFile.new()
 	var file_save = FileAccess.open(save_file_location, FileAccess.WRITE)
 	
@@ -110,9 +114,11 @@ func save_encounter():
 
 # Loads an encounter file
 func open_encounter():
-	
+	LoadDialog.choose_load_directory()
+
+func load_validated():
 	# Prompts the user for where the file is, then opens and reads the file
-	var load_file_location = "user://combat_driver.test.json"
+	var load_file_location = LoadDialog.current_path
 	var load_file := FileAccess.open(load_file_location, FileAccess.READ)
 	var encounter_data = load_file.get_var(true)
 	
@@ -125,7 +131,6 @@ func open_encounter():
 		loaded_enemy.setup_enemy(new_encounter_data.initialize_from_save_data(enemy))
 		loaded_enemy.viewing_enemy.connect(view_enemy_sheet)
 		add_enemy_to_initiative(loaded_enemy)
-	
 
 ## SIGNALS
 

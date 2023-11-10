@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 Tooltips="*res://Tooltips.gd"
 EventBus="*res://EventBus.gd"
+SaveDialog="*res://SaveDialog.tscn"
+LoadDialog="*res://LoadDialog.tscn"
 
 [display]
 
