@@ -13,7 +13,7 @@ bg_color = Color(1, 0.384314, 0.423529, 1)
 bg_color = Color(1, 1, 1, 1)
 
 [node name="EnemyTracker" type="PanelContainer"]
-custom_minimum_size = Vector2(800, 0)
+custom_minimum_size = Vector2(400, 0)
 offset_right = 800.0
 offset_bottom = 80.0
 script = ExtResource("1_7cgx7")

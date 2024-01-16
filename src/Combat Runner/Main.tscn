@@ -33,10 +33,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+current_tab = 1
 
 [node name="Combat" parent="TabBar" instance=ExtResource("1_4vf2w")]
+visible = false
 layout_mode = 2
 
 [node name="EnemyDatabase" parent="TabBar" instance=ExtResource("2_np0t7")]
-visible = false
 layout_mode = 2

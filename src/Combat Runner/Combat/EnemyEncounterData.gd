@@ -41,8 +41,8 @@ func initialize(enemy_sheet_data):
 # Just creates one and returns itself
 func initialize_from_save_data(save_enemy) -> EnemyEncounterData:
 	enemy_name = save_enemy["enemy_name"]
-	hp = save_enemy["hp"]
 	max_hp = save_enemy["max_hp"]
+	hp = save_enemy["hp"]
 	enemy_data = save_enemy["enemy_data"]
 	conditions = save_enemy["conditions"]
 	return self

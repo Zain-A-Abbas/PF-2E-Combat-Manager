@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://ws2ua84a6nnc"]
+
+[ext_resource type="Theme" uid="uid://usptm04bxef0" path="res://Themes/FilteringSorting.tres" id="1_f6oru"]
+
+[node name="NumberFilterOption" type="VBoxContainer"]
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 179.0
+offset_bottom = 36.0
+theme = ExtResource("1_f6oru")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Label"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="SpinBox" type="SpinBox" parent="HBoxContainer"]
+layout_mode = 2
+min_value = -100.0
+max_value = 1000.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "to"
+
+[node name="SpinBox2" type="SpinBox" parent="HBoxContainer"]
+layout_mode = 2
+min_value = -100.0
+max_value = 1000.0

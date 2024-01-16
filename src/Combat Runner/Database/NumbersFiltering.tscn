@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxm3l24gj3syg"]
+
+[ext_resource type="Theme" uid="uid://be3xj0wqsh8kv" path="res://Themes/FilterWindow.tres" id="1_kvq4g"]
+[ext_resource type="Script" path="res://Database/NumberFiltering.gd" id="2_e7vna"]
+[ext_resource type="PackedScene" uid="uid://ws2ua84a6nnc" path="res://Database/NumberFilterOption.tscn" id="3_aqtuy"]
+
+[node name="NumbersFiltering" type="PanelContainer"]
+offset_right = 400.0
+offset_bottom = 100.0
+theme = ExtResource("1_kvq4g")
+script = ExtResource("2_e7vna")
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="FiltersContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="FilterLabel" type="Label" parent="MarginContainer/FiltersContainer"]
+layout_mode = 2
+text = "Rarity"
+
+[node name="ResetAllButton" type="Button" parent="MarginContainer/FiltersContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Reset All"
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/FiltersContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 50
+columns = 4
+
+[node name="NumberFilterOption" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
+layout_mode = 2
+
+[node name="NumberFilterOption2" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
+layout_mode = 2
+
+[node name="NumberFilterOption3" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
+layout_mode = 2
+
+[node name="ApplyButton" type="Button" parent="MarginContainer/FiltersContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Apply filters"
+
+[connection signal="pressed" from="MarginContainer/FiltersContainer/ApplyButton" to="." method="_on_apply_button_pressed"]

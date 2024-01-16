@@ -14,13 +14,17 @@ signal renamed_enemy(enemy, new_name)
 
 var regex := RegEx.new()
 var hp: int = 0 : set = set_hp
-var max_hp: int = 0
+var max_hp: int = 0 : set = set_max_hp
 
 func set_hp(val: int):
 	hp = max(0, val)
 	current_hp.text = str(hp)
 	max_hp_box.text = str(max_hp)
 	hp_bar.value = max(0, float(hp) / float(max_hp) * 100)
+
+func set_max_hp(val: int):
+	max_hp = max(0, val)
+	max_hp_box.text = str(max_hp)
 
 # The enemy JSON data
 var enemy_data = null
@@ -34,8 +38,8 @@ func _ready():
 	regex.compile("^[0 -9]*$")
 
 func setup_enemy(encounter_enemy: EnemyEncounterData):
-	hp = encounter_enemy.hp
 	max_hp = encounter_enemy.max_hp
+	hp = encounter_enemy.hp
 	enemy_name = encounter_enemy.enemy_name
 	enemy_data = encounter_enemy.enemy_data
 	name_bar.text = enemy_name
@@ -43,7 +47,7 @@ func setup_enemy(encounter_enemy: EnemyEncounterData):
 # Creates a combat file for the sake of creating save files
 func create_combat_file():
 	var combat_data = {
-		"enemy_name": enemy_name,
+		"enemy_name": name_bar.text,
 		"hp": hp,
 		"max_hp": max_hp,
 		"conditions": conditions,
