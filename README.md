@@ -10,4 +10,4 @@ Combat Driver also allows you to efficiently create your own enemies and modify 
 This project is still in its early stages, and is thus incomplete for the time being. Thank you for your patience!
 
 
-This project is created in Godot 4.1.
+This project is created in Godot 4.2.
