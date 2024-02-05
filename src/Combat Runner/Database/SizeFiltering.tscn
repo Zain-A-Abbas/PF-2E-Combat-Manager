@@ -102,5 +102,5 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "Apply filters"
 
-[connection signal="pressed" from="MarginContainer/FiltersContainer/Subfilter/HBoxContainer/ResetButton" to="MarginContainer/FiltersContainer/Subfilter" method="_on_reset_button_pressed" flags=18]
+[connection signal="pressed" from="MarginContainer/FiltersContainer/Subfilter/HBoxContainer/ResetButton" to="MarginContainer/FiltersContainer/Subfilter" method="_on_reset_button_pressed"]
 [connection signal="pressed" from="MarginContainer/FiltersContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
