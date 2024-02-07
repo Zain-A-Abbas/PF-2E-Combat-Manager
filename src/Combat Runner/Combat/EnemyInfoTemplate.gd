@@ -27,7 +27,7 @@ func set_max_hp(val: int):
 	max_hp_box.text = str(max_hp)
 
 # The enemy JSON data
-var enemy_data = null
+var enemy_data: Dictionary = {}
 # The enemy's name
 var enemy_name: String
 
@@ -64,7 +64,7 @@ func _gui_input(event):
 # Tells the program to show the current sheet on the right-hand side
 func enemy_focus():
 	# Don't do anything if blank sheet
-	if enemy_data == null:
+	if enemy_data == {}:
 		return
 	
 	emit_signal("viewing_enemy", enemy_data)

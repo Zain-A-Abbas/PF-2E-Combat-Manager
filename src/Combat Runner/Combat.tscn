@@ -293,4 +293,4 @@ layout_mode = 2
 [connection signal="pressed" from="HBoxContainer/Panel/InitiativeRolling/Initiative/InitiativeMargins/VBoxContainer/InitiativeOptions/CopyInitiativeButton" to="." method="_on_copy_initiative_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Panel/InitiativeRolling/Rolling/DiceButtons/ClearDice" to="HBoxContainer/Panel/InitiativeRolling/Rolling/ResultsBg/Results" method="_on_clear_dice_pressed"]
 [connection signal="tab_changed" from="HBoxContainer/TrackerSheetSplit/EncounterTracker" to="." method="_on_encounter_tracker_tab_changed"]
-[connection signal="pressed" from="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/BlankEnemyButton" to="." method="_on_blank_enemy_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/TrackerSheetSplit/EncounterTracker/Encounter A/BlankEnemyButton" to="." method="add_enemy_from_sheet" binds= [{}]]

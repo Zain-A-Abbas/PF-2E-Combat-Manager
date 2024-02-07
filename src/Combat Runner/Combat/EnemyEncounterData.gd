@@ -21,19 +21,20 @@ var conditions = {}
 var initiative: int = 0
 
 # The enemy JSON data
-var enemy_data = null
+var enemy_data: Dictionary = {}
 
-# Making one when adding an enemy to an encounter
-func initialize(enemy_sheet_data):
+# Creates enemy data based off the sheet
+func initialize(enemy_sheet_data: Dictionary):
 # Makes it a blank enemy if no directory is given
-	if enemy_sheet_data == null:
+	if enemy_sheet_data == {}:
 		enemy_name = "Blank"
 		max_hp = 100
 		hp = 100
 		return
 	
-	enemy_data = enemy_sheet_data
+	enemy_data = enemy_sheet_data.duplicate()
 	# Access the name and hp values from the sheet
+	
 	enemy_name = enemy_data["name"]
 	max_hp = enemy_data["system"]["attributes"]["hp"]["max"]
 	hp = max_hp
