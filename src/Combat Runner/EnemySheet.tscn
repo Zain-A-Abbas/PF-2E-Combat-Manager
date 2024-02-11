@@ -78,6 +78,7 @@ theme_override_constants/margin_left = 5
 
 [node name="Data" type="VBoxContainer" parent="SheetData/SheetScroller/SheetInfo/SheetMargin"]
 layout_mode = 2
+theme_override_constants/separation = 6
 
 [node name="Traits" type="HBoxContainer" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
 layout_mode = 2
@@ -133,6 +134,7 @@ text = "[b]HP[/b] 390"
 [node name="DefensiveAbilities" type="VBoxContainer" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
 visible = false
 layout_mode = 2
+theme_override_constants/separation = 6
 
 [node name="HSeparator2" type="HSeparator" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
 layout_mode = 2
@@ -140,3 +142,4 @@ layout_mode = 2
 [node name="Speed&OffensiveAbilities" type="VBoxContainer" parent="SheetData/SheetScroller/SheetInfo/SheetMargin/Data"]
 visible = false
 layout_mode = 2
+theme_override_constants/separation = 6

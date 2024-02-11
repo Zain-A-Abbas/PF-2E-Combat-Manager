@@ -1,4 +1,5 @@
 extends Control
+class_name Sheet
 
 const trait_template := preload("res://Trait.tscn")
 const SHEET_CONTENT := preload("res://EnemySheet/SheetContent.tscn")
@@ -74,8 +75,12 @@ func setup(enemy_file, conditions = {}):
 	
 	# Other offensive abilities
 	setup_offensive_abilities()
+	
+	finalize_sheet_content()
 
-
+func finalize_sheet_content():
+	for child in find_children("", "SheetContent", true, false):
+		child.enemy_name = enemy_data["name"]
 
 func setup_traits():
 	# Clean up anything already there
@@ -329,7 +334,7 @@ func setup_other_defensive_abilities():
 			continue
 		
 		# Initialize ability
-		var new_ability_entry = SHEET_CONTENT.instantiate()
+		var new_ability_entry = create_sheet_content()
 		new_ability_entry.info_type = SheetContent.InfoTypes.TRAIT
 		
 		# Add name and reaction icon if applicable
@@ -371,7 +376,7 @@ func setup_other_defensive_abilities():
 func setup_speed():
 	for child in attacks.get_children():
 		attacks.remove_child(child)
-	var speed_entry = SHEET_CONTENT.instantiate()
+	var speed_entry = create_sheet_content()
 	var speed_text: String = "[b]Speed[/b] "
 	var speed = enemy_attributes["speed"]
 	if speed["value"] > 0:
@@ -400,7 +405,7 @@ func setup_attacks():
 		if ability["type"] == "melee":
 			
 			# Initialize ability
-			var new_attack_entry = SHEET_CONTENT.instantiate()
+			var new_attack_entry = create_sheet_content()
 			new_attack_entry.info_type = SheetContent.InfoTypes.TRAIT
 			
 			# Add name and icon
@@ -521,7 +526,7 @@ func setup_casting_entry(ability):
 		attack_roll_focus_points_text = str(focus_spell_count) + " Focus Points; [b]" + ordinal_numbers(int(ceili(enemy_system["details"]["level"]["value"] / 2))) + "[/b] "
 	
 	# Initialize spell_list
-	var spell_list = SHEET_CONTENT.instantiate()
+	var spell_list = create_sheet_content()
 	spell_list.text = tradition_title + dc_text + attack_roll_focus_points_text
 	attacks.add_child(spell_list)
 	
@@ -662,7 +667,7 @@ func setup_offensive_abilities():
 		if (ability["system"]["category"] == "offensive") || (ability["system"]["category"] == "interaction" && ability["system"]["actionType"]["value"] == "action"):
 			
 			# Initialize ability
-			var new_offensive_entry = SHEET_CONTENT.instantiate()
+			var new_offensive_entry = create_sheet_content()
 			new_offensive_entry.info_type = SheetContent.InfoTypes.TRAIT
 			
 			# Add name and icon
@@ -701,6 +706,11 @@ func setup_offensive_abilities():
 			new_offensive_entry.text = ability_name + action_icon + ability_traits + ability_description
 			attacks.add_child(new_offensive_entry)
 			attacks.visible = true
+
+func create_sheet_content() -> SheetContent:
+	var new_sheet_content = SHEET_CONTENT.instantiate()
+	new_sheet_content.enemy_name = enemy_data["name"]
+	return new_sheet_content
 
 func get_sheet_tooltip(tooltip_type, tooltip_reference) -> String:
 	var tooltip_list

@@ -19,12 +19,13 @@ func roll_dice(dice_faces: int):
 	var dice_result: int = randi_range(1, dice_faces)
 	text += "d" + str(dice_faces) + " = " + str(dice_result)
 
-func d20_with_mod(mod: int):
+func d20_with_mod(mod: int, enemy_name: String):
 	if text != "":
 		text += "\n"
 	var dice_result: int = randi_range(1, 20)
 	var dice_total: int = dice_result + mod
-	text += "d20" + " (" + str(dice_result) +  ") + " + str(mod) + " = " + str(dice_total)
+	text += enemy_name + " d20" + " (" + str(dice_result) +  ") + " + str(mod) + " = " + str(dice_total)
+
 
 func _on_clear_dice_pressed():
 	text = ""

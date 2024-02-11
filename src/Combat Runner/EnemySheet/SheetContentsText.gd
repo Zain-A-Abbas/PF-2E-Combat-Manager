@@ -11,6 +11,8 @@ enum InfoTypes {
 
 @export var info_type: InfoTypes
 
+var enemy_name: String
+
 func _make_custom_tooltip(for_text):
 	var tooltip
 	match info_type:
@@ -31,4 +33,4 @@ func _make_custom_tooltip(for_text):
 
 
 func _on_meta_clicked(meta):
-	EventBus.emit_signal("d20_rolled", meta.to_int())
+	EventBus.emit_signal("d20_rolled", meta.to_int(), enemy_name)

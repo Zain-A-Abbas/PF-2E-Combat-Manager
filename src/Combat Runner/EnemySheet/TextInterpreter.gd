@@ -1,8 +1,7 @@
 extends Node
 class_name TextInterpreter
 
-# Parsing ability descriptions
-
+## Parses ability descriptions
 func ability_parser(ability_text: String) -> String:
 	var parsed_description = remove_unnecessary(ability_text)
 	parsed_description = area_parser(parsed_description)
@@ -19,7 +18,7 @@ func ability_parser(ability_text: String) -> String:
 	parsed_description = list_parser(parsed_description)
 	return parsed_description
 
-# Removes unnecessary things such as <>'s, \ns, bestiary-ability and bestiary-effects from description
+## Removes unnecessary things such as <>'s, \ns, bestiary-ability and bestiary-effects from description
 func remove_unnecessary(ability_text: String) -> String:
 	var regex = RegEx.new()
 	
@@ -49,14 +48,14 @@ func remove_unnecessary(ability_text: String) -> String:
 	
 	return parsed_description
 
-# Turns bursts, cones, etc. into a readable format
+## Turns bursts, cones, etc. into a readable format
 func area_parser(ability_text: String) -> String:
 	var regex = RegEx.new()
 	regex.compile("@Template\\[type:(\\w+)\\|distance:(\\w+)](?:{([^}]*)})?")
 	if regex.search(ability_text) == null:
 		return ability_text
 	var area_text = regex.search(ability_text).strings
-	var area_result
+	var area_result: String
 	
 	# Makes it so "emanation" is not said
 	if area_text[1] != "emanation":
@@ -65,7 +64,7 @@ func area_parser(ability_text: String) -> String:
 		area_result = area_text[2] + " feet"
 	return area_parser(regex.sub(ability_text, area_result))
 
-# Recursive function that keeps sifting through the description for condition text
+## Recursive function that keeps sifting through the description for condition text
 func condition_parser(description_text: String) -> String:
 	var regex = RegEx.new()
 	regex.compile("@UUID\\[Compendium.pf2e.conditionitems.Item.(\\w+)]")
@@ -80,7 +79,7 @@ func condition_parser(description_text: String) -> String:
 	
 	return condition_parser(condition_text)
 
-# Gets damage from [[/r xdy[[element]]
+## Gets damage from [[/r xdy[[element]]
 func damage_parser(description_text: String) -> String:
 	var regex = RegEx.new()
 	regex.compile("\\[\\[/r (\\S+)\\[(\\S+)\\]\\]\\]")
@@ -90,7 +89,7 @@ func damage_parser(description_text: String) -> String:
 	var damage_text = damage_strings.strings[1] + " " + damage_strings.strings[2]
 	return damage_parser(regex.sub(description_text, damage_text))
 
-# Gets damage from @Damage[xdy[element]]
+## Gets damage from @Damage[xdy[element]]
 func damage_parser2(description_text: String) -> String:
 	var regex = RegEx.new()
 	regex.compile("@Damage\\[(.*?)\\[(.*?)]]")
@@ -100,7 +99,7 @@ func damage_parser2(description_text: String) -> String:
 	var damage_text = damage_strings.strings[1] + " " + damage_strings.strings[2]
 	return damage_parser2(regex.sub(description_text, damage_text))
 
-# Gets damage from [[/r xdy[[element]]{more stuff}
+## Gets damage from [[/r xdy[[element]]{more stuff}
 	# Having 3 functions for this is not nice but it is a lot faster than making the regex even more gritty
 func damage_parser3(description_text: String) -> String:
 	var regex = RegEx.new()
@@ -111,7 +110,7 @@ func damage_parser3(description_text: String) -> String:
 	var damage_text = damage_strings.strings[2]
 	return damage_parser3(regex.sub(description_text, damage_text))
 
-# Gets spell names from @UUID[Compendium.pf2e.spells-srd.Item.X]
+## Gets spell names from @UUID[Compendium.pf2e.spells-srd.Item.X]
 # TD: Add URL here for spell previews.
 func spell_parser(description_text: String) -> String:
 	var regex = RegEx.new()
@@ -122,7 +121,7 @@ func spell_parser(description_text: String) -> String:
 	var spell_text = damage_strings.strings[1]
 	return spell_parser(regex.sub(description_text, spell_text))
 
-# Get saves from @Check[type:X|dc:Y|Z]
+## Get saves from @Check[type:X|dc:Y|Z]
 func save_parser(description_text: String) -> String:
 	var regex = RegEx.new()
 	regex.compile("@Check\\[type:(.*?)\\|dc:([0-9]+)(?: *\\|(.+?))?]")
@@ -137,7 +136,7 @@ func save_parser(description_text: String) -> String:
 	saving_text += " " + regex.search(description_text).strings[1].capitalize()
 	return save_parser(regex.sub(description_text, saving_text))
 
-# Get recharge rounds from [[/br X]{Y}
+## Get recharge rounds from [[/br X]{Y}
 func recharge_parser(description_text: String) -> String:
 	var regex = RegEx.new()
 	regex.compile("\\[\\[/br\\s(.*?)\\]\\{(.*?)\\}")
@@ -145,7 +144,7 @@ func recharge_parser(description_text: String) -> String:
 		return description_text
 	return recharge_parser(regex.sub(description_text, regex.search(description_text).strings[2]))
 
-# Parses common actions such as escaping
+## Parses common actions such as escaping
 func action_parser(description_text: String) -> String:
 	var regex = RegEx.new()
 	regex.compile("@UUID\\[Compendium\\.pf2e\\.actionspf2e\\.Item\\.(.*?)\\]")
@@ -155,7 +154,7 @@ func action_parser(description_text: String) -> String:
 	var action_name: String = action_strings.strings[1]
 	return action_parser(regex.sub(description_text, action_name))
 
-# Parses enemy names if it refers to another enemy
+## Parses enemy names if it refers to another enemy
 func enemy_name_parser(description_text: String) -> String:
 	var regex = RegEx.new()
 	regex.compile("@UUID\\[Compendium\\.pf2e\\.(.*?)\\.Actor\\.(.*?)\\]")
@@ -165,7 +164,7 @@ func enemy_name_parser(description_text: String) -> String:
 	var enemy_name: String = enemy_strings.strings[2]
 	return enemy_name_parser(regex.sub(description_text, enemy_name))
 
-# Corrects formatting such as turning <strong> to [b]
+## Corrects formatting such as turning <strong> to [b]
 func format_parser(description_text: String) -> String:
 	var regex = RegEx.new()
 	regex.compile("<strong>")
@@ -175,6 +174,7 @@ func format_parser(description_text: String) -> String:
 	regex.compile("</strong>")
 	return format_parser(regex.sub(formatted_description, "[/b]"))
 
+## Makes lists out of abilities like spells
 func list_parser(description_text: String) -> String:
 	if !description_text.contains("<ul>"):
 		return description_text
@@ -214,13 +214,12 @@ func list_parser(description_text: String) -> String:
 	
 	return list_parser(new_description)
 
-# Parsing trait names
-
+## Parses trait names
 func trait_name_parser(trait_name: String) -> String:
 	var parsed_trait := range_parser(trait_name)
 	return parsed_trait
 
-# Changes "reach-20" to "reach 20 feet", etc.
+## Changes "reach-20" to "reach 20 feet", etc.
 func range_parser(trait_text: String) -> String:
 	var regex = RegEx.new()
 	regex.compile("reach-(\\d+)")
