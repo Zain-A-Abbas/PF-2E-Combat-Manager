@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ws2ua84a6nnc"]
+[gd_scene load_steps=3 format=3 uid="uid://ws2ua84a6nnc"]
 
 [ext_resource type="Theme" uid="uid://usptm04bxef0" path="res://Themes/FilteringSorting.tres" id="1_f6oru"]
+[ext_resource type="Script" path="res://Database/NumberFilterOption.gd" id="2_txxrd"]
 
 [node name="NumberFilterOption" type="VBoxContainer"]
 offset_left = 2.0
@@ -8,6 +9,7 @@ offset_top = 2.0
 offset_right = 179.0
 offset_bottom = 36.0
 theme = ExtResource("1_f6oru")
+script = ExtResource("2_txxrd")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2

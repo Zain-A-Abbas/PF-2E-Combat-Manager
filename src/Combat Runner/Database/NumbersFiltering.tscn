@@ -38,12 +38,47 @@ columns = 4
 
 [node name="NumberFilterOption" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
 layout_mode = 2
+filter_option = "Level"
 
 [node name="NumberFilterOption2" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
 layout_mode = 2
+filter_option = "HP"
 
 [node name="NumberFilterOption3" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
 layout_mode = 2
+filter_option = "AC"
+
+[node name="NumberFilterOption4" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
+layout_mode = 2
+filter_option = "Strength Score"
+
+[node name="NumberFilterOption5" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
+layout_mode = 2
+filter_option = "Fortitude Save"
+
+[node name="NumberFilterOption6" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
+layout_mode = 2
+filter_option = "Reflex Save"
+
+[node name="NumberFilterOption7" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
+layout_mode = 2
+filter_option = "Will Save"
+
+[node name="NumberFilterOption8" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
+layout_mode = 2
+filter_option = "Perception"
+
+[node name="NumberFilterOption9" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
+layout_mode = 2
+filter_option = "Land Speed"
+
+[node name="NumberFilterOption10" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
+layout_mode = 2
+filter_option = "Fire Resistance"
+
+[node name="NumberFilterOption11" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
+layout_mode = 2
+filter_option = "Fire Weakness"
 
 [node name="ApplyButton" type="Button" parent="MarginContainer/FiltersContainer"]
 layout_direction = 3
