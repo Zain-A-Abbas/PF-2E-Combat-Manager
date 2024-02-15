@@ -50,7 +50,9 @@ filter_option = "AC"
 
 [node name="NumberFilterOption4" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
 layout_mode = 2
-filter_option = "Strength Score"
+filter_option = "Score"
+has_dropdown = true
+list_filtering = 0
 
 [node name="NumberFilterOption5" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
 layout_mode = 2
@@ -70,15 +72,19 @@ filter_option = "Perception"
 
 [node name="NumberFilterOption9" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
 layout_mode = 2
-filter_option = "Land Speed"
+filter_option = "Speed"
+has_dropdown = true
+list_filtering = 1
 
 [node name="NumberFilterOption10" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
 layout_mode = 2
-filter_option = "Fire Resistance"
+filter_option = "Resistance"
+has_dropdown = true
 
 [node name="NumberFilterOption11" parent="MarginContainer/FiltersContainer/GridContainer" instance=ExtResource("3_aqtuy")]
 layout_mode = 2
-filter_option = "Fire Weakness"
+filter_option = "Weakness"
+has_dropdown = true
 
 [node name="ApplyButton" type="Button" parent="MarginContainer/FiltersContainer"]
 layout_direction = 3

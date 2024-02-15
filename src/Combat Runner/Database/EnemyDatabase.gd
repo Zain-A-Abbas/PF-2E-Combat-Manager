@@ -15,6 +15,7 @@ enum SORT_MODE {
 @onready var rarity_filter_menu := $CenterContainer/RarityFilterMenu
 @onready var trait_filter_menu := $CenterContainer/TraitFilterMenu
 @onready var search_bar := $Database/MarginContainer/SortingFiltering/SearchBar
+@onready var numbers_filtering := $CenterContainer/NumbersFiltering
 
 signal add_enemy(enemy_data)
 
@@ -86,7 +87,7 @@ static func sort_level(enemy_a: EnemyFilterData, enemy_b: EnemyFilterData):
 # Filters
 
 func filter_enemies(enemies_to_filter: Array[EnemyFilterData]) -> Array[EnemyFilterData]:
-	var filtering := enemies_to_filter
+	var filtering := enemies_to_filter.duplicate()
 	filtering = name_filter(filtering, search_bar.text)
 	filtering = general_filter(filtering, "rarity")
 	filtering = general_filter(filtering, "size")
@@ -231,11 +232,20 @@ func _on_trait_filter_menu_apply_filter():
 	trait_filter_menu.visible = false
 	sort_filter_enemies()
 
-
+func _on_numbers_filtering_apply_filter():
+	numbers_filtering.visible = false
+	sort_filter_enemies()
 
 func _on_search_bar_text_changed(new_text):
 	sort_filter_enemies()
 
+func _on_numbers_filter_button_pressed():
+	numbers_filtering.visible = !numbers_filtering.visible
 
 func _on_add_to_combat_button_pressed():
 	emit_signal("add_enemy", enemy_sheet.enemy_data)
+
+
+
+
+
