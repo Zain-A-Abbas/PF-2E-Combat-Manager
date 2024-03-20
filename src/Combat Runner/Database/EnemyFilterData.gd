@@ -13,6 +13,7 @@ var ac: int
 var scores := {}
 
 var saves := {}
+var perception : int
 
 # Extra speed, resistance, and weakness types are added when adding the enemy to the array
 var speed := {
@@ -70,6 +71,7 @@ func initialize(enemy_data, file_location):
 	saves["fortitude"] = enemy_data["system"]["saves"]["fortitude"]["value"]
 	saves["reflex"] = enemy_data["system"]["saves"]["reflex"]["value"]
 	saves["will"] = enemy_data["system"]["saves"]["will"]["value"]
+	perception = enemy_data["system"]["attributes"]["perception"]["value"]
 	
 	speed["land"] = enemy_system_data["speed"]["value"]
 	# Adds every type of speed that is not land speed

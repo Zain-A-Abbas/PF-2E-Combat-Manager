@@ -31,12 +31,13 @@ func _ready():
 			create_pop_ups(ELEMENTS)
 
 func create_pop_ups(options : Array[String]):
+	menu_button.get_popup().clear()
 	for option in options:
 		menu_button.get_popup().add_item(option)
 	menu_button.text = menu_button.get_popup().get_item_text(0)
 
 func return_filter() -> NumberFilterData:
-	var return_value : NumberFilterData = NumberFilterData.new("", spin_box.value, spin_box_2.Value)
+	var return_value : NumberFilterData = NumberFilterData.new("", spin_box.value, spin_box_2.value)
 	if has_dropdown:
 		var popup = menu_button.get_popup()
 		print(popup.get_item_text(popup.get_focused_item()))

@@ -1,5 +1,6 @@
 extends FilteringMenu
 
+@onready var grid_container = $MarginContainer/FiltersContainer/GridContainer
 
 func _ready():
 	filter_container = find_children("", "FilterButton", true, true)
@@ -10,6 +11,13 @@ func has_no_filters() -> bool:
 		if filter_node.filter_state != 0:
 			return false
 	return true
+
+func get_number_filter_data() -> Array[NumberFilterData]:
+	var number_filters = grid_container.get_children()
+	var return_data : Array[NumberFilterData] = []
+	for child in number_filters:
+		return_data.append(child.return_filter())
+	return return_data
 
 func _on_apply_button_pressed():
 	emit_signal("apply_filter")

@@ -92,6 +92,7 @@ func filter_enemies(enemies_to_filter: Array[EnemyFilterData]) -> Array[EnemyFil
 	filtering = general_filter(filtering, "rarity")
 	filtering = general_filter(filtering, "size")
 	filtering = general_filter(filtering, "traits")
+	filtering = number_filter(filtering)
 	return filtering
 
 func name_filter( enemies_to_filter: Array[EnemyFilterData], search_name: String ) -> Array[EnemyFilterData]:
@@ -107,6 +108,43 @@ func name_filter( enemies_to_filter: Array[EnemyFilterData], search_name: String
 			include_enemies.append(enemy)
 	
 	return include_enemies
+	
+func outOfBounds(value: int, f: NumberFilterData):
+	return !(value >= f.lower_bound && value <= f.upper_bound)
+	
+
+func number_filter( enemies_to_filter: Array[EnemyFilterData]) -> Array[EnemyFilterData]:
+	var filterData : Array[NumberFilterData] = numbers_filtering.get_number_filter_data()
+	var validEnemies : Array[EnemyFilterData] = enemies_to_filter
+	#main filter
+	for filter: NumberFilterData in filterData:
+		if filter.lower_bound == 0 && filter.upper_bound == 0:
+			continue
+		var validEnemiesSize : int = validEnemies.size()-1
+		for i in range(validEnemiesSize, -1, -1):
+			match filter.text:
+				"Level":
+					if outOfBounds(validEnemies[i].level, filter):
+						validEnemies.remove_at(i)
+				"HP":
+					if outOfBounds(validEnemies[i].hp, filter):
+						validEnemies.remove_at(i)
+				"AC":
+					if outOfBounds(validEnemies[i].ac, filter):
+						validEnemies.remove_at(i)
+				"Fortitude Save":
+					if outOfBounds(validEnemies[i].saves["fortitude"], filter):
+						validEnemies.remove_at(i)
+				"Reflex Save":
+					if outOfBounds(validEnemies[i].saves["reflex"], filter):
+						validEnemies.remove_at(i)
+				"Will Save":
+					if outOfBounds(validEnemies[i].saves["will"], filter):
+						validEnemies.remove_at(i)
+				"Perception":
+					if outOfBounds(validEnemies[i].perception, filter):
+						validEnemies.remove_at(i)
+	return validEnemies
 
 # Sorts by rarity, traits and size; They share a function because of how similar they are
 func general_filter( enemies_to_filter: Array[EnemyFilterData], rarity_size_traits: String ) -> Array[EnemyFilterData]:
