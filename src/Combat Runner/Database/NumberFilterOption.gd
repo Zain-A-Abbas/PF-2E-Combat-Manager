@@ -40,7 +40,6 @@ func return_filter() -> NumberFilterData:
 	var return_value : NumberFilterData = NumberFilterData.new("", spin_box.value, spin_box_2.value)
 	if has_dropdown:
 		var popup = menu_button.get_popup()
-		print(popup.get_item_text(popup.get_focused_item()))
 		return_value.text = popup.get_item_text(popup.get_focused_item())
 	else:
 		print(filter_option)

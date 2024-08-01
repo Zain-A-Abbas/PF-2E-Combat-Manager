@@ -16,6 +16,7 @@ enum SORT_MODE {
 @onready var trait_filter_menu := $CenterContainer/TraitFilterMenu
 @onready var search_bar := $Database/MarginContainer/SortingFiltering/SearchBar
 @onready var numbers_filtering := $CenterContainer/NumbersFiltering
+@onready var enemy_creator = %EnemyCreator
 
 signal add_enemy(enemy_data)
 
@@ -225,6 +226,9 @@ func general_filter( enemies_to_filter: Array[EnemyFilterData], rarity_size_trai
 	
 	return enemies_to_filter
 
+func new_enemy():
+	enemy_creator.visible = true
+
 # Signals
 
 func _on_enemy_list_item_selected(index):
@@ -283,7 +287,10 @@ func _on_numbers_filter_button_pressed():
 func _on_add_to_combat_button_pressed():
 	emit_signal("add_enemy", enemy_sheet.enemy_data)
 
+func _on_new_enemy_button_pressed():
+	new_enemy()
 
 
-
-
+func _on_enemy_creator_sheet_created():
+	enemy_creator.visible = false
+	add_enemies()

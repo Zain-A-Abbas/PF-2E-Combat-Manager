@@ -102,7 +102,10 @@ func setup_traits():
 		insert_trait("UNIQUE")
 	
 	# Alignment
-	insert_trait(enemy_system["details"]["alignment"]["value"])
+	if enemy_system["details"].has("alignment"):	
+		if enemy_system["details"]["alignment"].has("value"):
+			if enemy_system["details"]["alignment"]["value"] != "":
+				insert_trait(enemy_system["details"]["alignment"]["value"])
 	
 	# Size
 	insert_trait(trait_data["size"]["value"])
@@ -271,23 +274,24 @@ func setup_hp_immunities_weaknesses():
 			hp_resistances.text += resistance["type"] + " " + str(resistance["value"])
 			var j: int = 0
 			if resistance.has("exceptions"):
-				hp_resistances.text += " (except "
-				for exception in resistance["exceptions"]:
-					hp_resistances.text += exception
-					j += 1
-					if j < resistance["exceptions"].size():
-						hp_resistances.text += ", "
-					else:
-						if resistance.has("doubleVs"):
-							double_vs = true
-							hp_resistances.text += "; double resistance vs. "
-							var k: int = 0
-							for double_versus in resistance["doubleVs"]:
-								hp_resistances.text += double_versus
-								k += 1
-								if k < resistance["doubleVs"].size():
-									hp_resistances.text += ", "
-						hp_resistances.text += ")"
+				if resistance["exceptions"].size() > 0:
+					hp_resistances.text += " (except "
+					for exception in resistance["exceptions"]:
+						hp_resistances.text += exception
+						j += 1
+						if j < resistance["exceptions"].size():
+							hp_resistances.text += ", "
+						else:
+							if resistance.has("doubleVs"):
+								double_vs = true
+								hp_resistances.text += "; double resistance vs. "
+								var k: int = 0
+								for double_versus in resistance["doubleVs"]:
+									hp_resistances.text += double_versus
+									k += 1
+									if k < resistance["doubleVs"].size():
+										hp_resistances.text += ", "
+							hp_resistances.text += ")"
 			
 			if resistance.has("doubleVs") && !double_vs:
 				double_vs = true
