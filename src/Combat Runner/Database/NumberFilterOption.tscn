@@ -19,7 +19,6 @@ layout_mode = 2
 text = "Acid"
 item_count = 25
 popup/item_0/text = "Acid"
-popup/item_0/id = 0
 popup/item_1/text = "All"
 popup/item_1/id = 1
 popup/item_2/text = "Bleed"

@@ -40,6 +40,8 @@ metadata/_edit_lock_ = true
 [node name="Combat" parent="TabBar" instance=ExtResource("1_4vf2w")]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="EnemyDatabase" parent="TabBar" instance=ExtResource("2_np0t7")]
 layout_mode = 2
+metadata/_tab_index = 1
